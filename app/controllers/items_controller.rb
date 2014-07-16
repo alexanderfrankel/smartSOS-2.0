@@ -4,7 +4,7 @@ class ItemsController < ApplicationController
 
 		if @item.save
 		else
-			flash.now.alert = "Apologies. Your item was not created.
+			flash.now.alert = "Apologies. Your item was not created."
 		end
 	end
 end
