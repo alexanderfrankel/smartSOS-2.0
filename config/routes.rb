@@ -10,6 +10,8 @@ Smartsos::Application.routes.draw do
     resources :pledges, only: [:new, :create]
   end
 
+	resources :items, only: [:create]
+
   resources :donors, only: [:new, :create]
 
   # SESSION ROUTES

@@ -4,6 +4,7 @@ class CreateRequests < ActiveRecord::Migration
       t.belongs_to :campaign
       t.belongs_to :item
       t.integer :quantity
+			t.string :due_date
 
       t.timestamps
     end

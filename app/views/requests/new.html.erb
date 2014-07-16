@@ -7,6 +7,14 @@
         <div class="new-requested-items-total">Total: $<%= @campaign.total_requests_price %></div>
         <div class="new-requested-items-submit"><%= link_to "Complete Requests", organization_path(@organization) %></div>
       </div>
+			<div class="non-amazon-item">
+				<%= form_tag("/items", method: "post") do %>
+					<%= label_tag(:item, "Add item not listed: ") %>
+					<%= text_field_tag(:item) %>
+					<%= hidden_field_tag "campaign_id", @campaign.id %> 
+					<%= submit_tag("Add Item") %>
+				<% end %>
+			</div>
     </div>
     <div class="available-items col-md-6">
       <div class="available-items-title"><h2>Available Items</h2></div>
