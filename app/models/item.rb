@@ -1,10 +1,10 @@
 class Item < ActiveRecord::Base
   has_many :requests
 
-  validates :asin, uniqueness:true
+  # validates :asin, uniqueness:true
   validates :name, presence: true
-  #validates :img_url
-  #validates :price
+  # validates :img_url
+  # validates :price
 
   def price_dollars
 		if self.price

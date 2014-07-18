@@ -5,8 +5,8 @@ class ItemsController < ApplicationController
 		if @item.save
 			redirect_to new_campaign_request_path(params[:campaign_id])
 		else
-			puts @item.errors
 			flash.now.alert = "Apologies. Your item was not created."
+			redirect_to new_campaign_request_path(params[:campaign_id])
 		end
 	end
 end

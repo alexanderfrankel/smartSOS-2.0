@@ -1,5 +1,5 @@
 require 'faker'
-require 'sucker'
+require 'vacuum'
 require 'yaml'
 
 def reset_database!
@@ -11,75 +11,50 @@ end
 reset_database!
 
 
+# ITEM SEED
 
-organizations = [["Red Cross", "redcross@redcross.org"], ["UNICEF", "unicef@unicef.org"]]
+# Other ASINS:
+# asins = %w[ B0069FTP0G B001949TKS B0039PV1QK B005FEGYJC B000GCRWCG B005VYRBRA B001YJHEDW
+#             B002GYVFOI B004E3EIEI B000KKB2OS B001U6MJCK B00363WZY2 B00363X1M2 B001HT720O
+#             B00IKLHDLU B004VLKLJE B00BG2BBSG B005IRWWZ6 B00008W2LC B00BLZ2312 ]
 
-# general_search_items = %w[soap toothbrush toothpaste tampons] #dog_food water canned_food batteries first_aid_kit baby_formula diapers dehydrated_food]
-asins = %w[ B0069FTP0G B001949TKS B0039PV1QK B005FEGYJC B000GCRWCG B005VYRBRA B001YJHEDW
-            B002GYVFOI B004E3EIEI B000KKB2OS B001U6MJCK B00363WZY2 B00363X1M2 B001HT720O
-            B00IKLHDLU B004VLKLJE B00BG2BBSG B005IRWWZ6 B00008W2LC B00BLZ2312 ]
+asins = %w[ B0069FTP0G B001949TKS B0039PV1QK B005FEGYJC B000GCRWCG B005VYRBRA B001YJHEDW ]
 
-# general_search_items.each do |item|
-asins.each do |asin|
+def retrieve_data(asin)
 
-  # 3.times do |num|
+    req = Vacuum.new
 
-    worker = Sucker.new(
-      :associate_tag => 'sm0cd-2',
-      :key => ENV['access_key_id'],
-      :secret => ENV['secret_access_key'],
-      :locale => :us)
+    req.configure(
+      aws_access_key_id:     ENV[:access_key_id],
+      aws_secret_access_key: ENV[:secret_access_key],
+      associate_tag:         'sm0cd-2'
+    )
 
-
-    worker << {
-      # :operation => 'ItemSearch',
-      # :item_page => num,
-      # :search_index => 'HealthPersonalCare',
-      # :keywords => item,
-      # :response_group => 'ItemAttributes, ItemIds, Large',
-      # :maximum_price => '2000'
-
-      :operation   =>  'ItemLookup',
-      :id_type      =>  'ASIN',
-      :item_id      =>  asin,
-      :response_group => 'ItemAttributes, ItemIds, Large'
+    params = {
+      'ItemId'        => asin,
+      'ResponseGroup' => 'ItemAttributes, ItemIds, Large'
     }
 
-
-    response = worker.get
-
-    response.each('Item') do |i|
-
-
-      if i['ItemAttributes']['ListPrice']
-        name = i['ItemAttributes']['Title']
-        asin = i['ASIN']
-        category = nil
-        price = i['ItemAttributes']['ListPrice']['Amount']
-
-
-        if i['ImageSets']['ImageSet'].class == Array
-          img_url = i['ImageSets']['ImageSet'][0]['LargeImage']['URL']
-        else
-          img_url = i['ImageSets']['ImageSet']['LargeImage']['URL']
-        end
-
-        item_attributes = {name: name,
-                            asin: asin,
-                            category: nil,
-                            img_url: img_url,
-                            price: price}
-
-      item = Item.new(item_attributes)
-      if item.save
-        puts "Item saved."
-      end
-
-      end
-    sleep 1
-    end
-  # end
+    return req.item_lookup(query: params).to_h
 end
+
+asins.each do |asin|
+  item_data = retrieve_data(asin)
+  item_attributes = { name: item_data["ItemLookupResponse"]["Items"]["Item"]["ItemAttributes"]["Title"],
+                      asin: asin,
+                      category: item_data["ItemLookupResponse"]["Items"]["Item"]["ItemAttributes"]["ProductGroup"],
+                      img_url: item_data["ItemLookupResponse"]["Items"]["Item"]["SmallImage"]["URL"],
+                      price: item_data["ItemLookupResponse"]["Items"]["Item"]["OfferSummary"]["LowestNewPrice"]["Amount"]
+                    }
+
+  item = Item.new(item_attributes)
+  puts "Item saved." if item.save
+end
+
+
+# ORGANIZATION SEED
+
+organizations = [["Red Cross", "redcross@redcross.org"], ["UNICEF", "unicef@unicef.org"]]
 
 organizations.each do |org|
   puts organizations.count
@@ -98,6 +73,9 @@ organizations.each do |org|
                         url: Faker::Internet.url)
 end
 
+
+# DONOR SEED
+
 10.times do
   puts 'donor'
   Donor.create( first_name: Faker::Name.first_name,
@@ -107,48 +85,43 @@ end
                 password_confirmation: "yolo")
 end
 
-# Organization.all.each do |org|
-#   puts "*" * 100
-#   campaign_names = [  ["Hurricane Alex Relief", "Please help those affected by Hurricane Alex by donating today."],
-#                       ["Tsunami Relief", "Please help those affected by the tsunami by donating today."] ]
-#   campaign_names.each do |campaign_name|
-#     puts 'campaign'
-#     org.campaigns << Campaign.create(
-#                       name: campaign_name[0],
-#                       description: campaign_name[1],
-#                       end_date: '06-25-2014')
-#   end
-# end
 
-# Campaign.all.each do |campaign|
-#   items = Item.all
-#   10.times do
-#     puts 'request'
-#     Request.create( campaign_id: campaign.id,
-#                     item_id: items.pop.id,
-#                     quantity: rand(10))
-#   end
+# CAMPAIGN SEED
 
-#   requests = Request.all
-#   donors = Donor.all
-#   2.times do
-#     puts 'pledge'
-#     Pledge.create(  donor_id: donors.pop.id,
-#                     request_id: requests.pop.id,
-#                     quantity: rand(10))
-#   end
-# end
+Organization.all.each do |org|
+  puts "*" * 100
+  campaign_names = [  ["Hurricane Alex Relief", "Please help those affected by Hurricane Alex by donating today."],
+                      ["Tsunami Relief", "Please help those affected by the tsunami by donating today."] ]
+  campaign_names.each do |campaign_name|
+    puts 'campaign'
+    org.campaigns << Campaign.create(
+                      name: campaign_name[0],
+                      description: campaign_name[1],
+                      end_date: '06-25-2014')
+  end
+end
 
 
+# REQUEST SEED
+
+Campaign.all.each do |campaign|
+  items = Item.all
+  7.times do
+    puts 'request'
+    Request.create( campaign_id: campaign.id,
+                    item_id: items.pop.id,
+                    quantity: rand(10))
+  end
 
 
+# PLEDGE SEED
 
-
-
-
-
-
-
-
-
-
+  requests = Request.all
+  donors = Donor.all
+  2.times do
+    puts 'pledge'
+    Pledge.create(  donor_id: donors.pop.id,
+                    request_id: requests.pop.id,
+                    quantity: rand(10))
+  end
+end
