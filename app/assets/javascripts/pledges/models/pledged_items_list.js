@@ -9,8 +9,9 @@ PledgedItemsList.prototype = {
         if (existingPledge) {
             existingPledge.quantity++;
         } else {
-            this.pledges.push(new Pledge(newPledge.id, newPledge.name, newPledge.price, newPledge.url));
+            this.pledges.push(new Pledge(newPledge.id, newPledge.asin, newPledge.name, newPledge.price, newPledge.url));
         }
+        console.log(this.pledges);
         this.updateTotal();
     },
 
