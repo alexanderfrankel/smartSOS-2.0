@@ -22,7 +22,9 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'bcrypt-ruby', '~> 3.1.2'
 
-gem 'sucker'
+# gem 'sucker'
+
+gem 'vacuum', '~> 1.1.1'
 
 gem 'bootstrap-sass', '~> 3.1.1'
 
