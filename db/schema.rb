@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 20140617204942) do
     t.string   "name"
     t.string   "category"
     t.string   "img_url"
-    t.integer  "price"
+    t.integer  "price",        default: 0
     t.boolean  "amazon_item?"
     t.datetime "created_at"
     t.datetime "updated_at"
