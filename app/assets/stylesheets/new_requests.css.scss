@@ -22,8 +22,8 @@
   width: 100%;
   padding: 5px;
   margin-top: 2px;
-  border-radius: 5px;
-  background-color: $jade;
+  // border-radius: 5px;
+  background-color: #674172;
   cursor: pointer;
   overflow: hidden;
 }
@@ -34,8 +34,8 @@
   width: 100%;
   padding: 5px;
   margin-top: 2px;
-  border-radius: 5px;
-  background-color: $bluegray;
+  // border-radius: 5px;
+  background-color: #6C7A89;
   cursor: pointer;
   overflow: hidden;
 }
@@ -44,9 +44,10 @@
   float: left;
   height: 80px;
   width: 80px;
-  border-radius: 10px;
+  // border-radius: 10px;
   overflow: hidden;
   margin: 2px;
+  display: none;
 }
 
 .available-item-name, .new-requested-item-name{
@@ -69,9 +70,10 @@
   float: right;
   width: 25%;
   height: auto;
-  color: $coral;
+  color: white;
   font-weight: bold;
   font-size: 18px;
+  margin-top: 10px;
 }
 
 .available-item-price, .new-requested-item-price{
@@ -82,9 +84,11 @@
   size: 14px;
 }
 
+
+
 .new-requested-item-delete a{
   background-color: $skyblue;
-  border-radius: 10px;
+  // border-radius: 10px;
   color: $white;
   font-weight: bold;
   padding: 8px;
@@ -98,8 +102,8 @@
 .new-requested-items-total{
   color: $white;
   display: inline;
-  background: $moneygreen;
-  border-radius: 10px;
+  background: black;
+  // border-radius: 10px;
   padding: 2px 14px;
   font-size: 25px;
   text-align: center;
@@ -108,15 +112,18 @@
 .new-requested-items-submit{
   float: right;
   display: inline;
-  background: $skyblue;
-  border-radius: 10px;
+  // background: black;
+  background: rgb(0, 0, 0); /* Fallback for older browsers without RGBA-support */
+  background: rgba(0, 0, 0, 1.0);
+  border: red 1px solid;
+  // border-radius: 10px;
   width: 20%;
   font-size: 25px;
   text-align: center;
 }
 
 .new-requested-items-submit:hover{
-  background: $darkbluegreen;
+  background: green;
 }
 
 .new-requested-items-submit a{

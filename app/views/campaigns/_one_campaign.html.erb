@@ -15,11 +15,11 @@
           <p class="detail-content"><%= campaign.total_request_quantity  %></p>
         </div>
         <div class="detail-box">
-          <p>Total Items Pledged</p>
+          <p>Items Donated</p>
           <p class="detail-content"> <%= campaign.total_pledge_quantity %></p>
         </div>
 
-        <div>
+        <div class="percent-donated">
           <p class= "text-center">Percentage of Total Pledged</p>
           <p class=" detail-content percentage text-center"><%= campaign.percentage_goal_complete %>%</p>
         </div>
@@ -35,7 +35,7 @@
         </div>
 
         <div class="pledge-btn">
-          <%= link_to "PLEDGE", new_campaign_pledge_path(campaign.id), class: "btn btn-primary pledge" %>
+          <%= link_to "DONATE", new_campaign_pledge_path(campaign.id), class: "btn btn-primary pledge" %>
         </div>
 
       </div>

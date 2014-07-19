@@ -1,10 +1,17 @@
+body {
+	
+}
+
+
 .jumbotron {
 	position: fixed;
+	// background-color: red;
+	background-image: url('http://www.talentedladiesclub.com/site/wp-content/uploads/team-work.jpg');
+	// background-image: url('http://rapidboostmarketing.com/wp-content/uploads/2013/12/Rapid-boost-marketing-charity4.jpg');
 	bottom: -5%;
 	top: 0;
 	right: 0;
 	left: 0;
-	// background-image: url('http://www.talentedladiesclub.com/site/wp-content/uploads/team-work.jpg');
 	background-size: 1400px 900px;
 	background-repeat: repeat-n;
 	color: white;
@@ -14,11 +21,41 @@
 	background-size: cover;
 }
 
+p {
+	color: white;
+	
+  // font-family: 'Open Sans', sans-serif;
+}
 
-#quote {
+
+.quote-container {
 	padding-left: 45px;
-	padding-top: 100px;
+	padding-top: 25px;
+	margin: auto;
+	margin-top: 100px;
 	padding-bottom: 21%;
 	width: 80%;
+	height: 20%;
+	background-color: black;
+  background: rgb(0, 0, 0); /* Fallback for older browsers without RGBA-support */
+  background: rgba(0, 0, 0, 0.5);
 }
+
+.quote-container p {
+		font-size: 50px;
+}
+
+.quote-container p.sub-quote {
+	font-size: 20px;
+}
+
+
+.btn {
+   -webkit-border-radius: 20px;
+   -moz-border-radius: 20px;
+   border-radius: 0px;
+}
+
+
+
 

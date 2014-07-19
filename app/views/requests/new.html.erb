@@ -9,7 +9,7 @@
       </div>
 			<div class="non-amazon-item">
 				<%= form_tag("/items", method: "post") do %>
-					<%= label_tag(:item, "Add item not listed: ") %>
+					<%= label_tag(:item, "Add item not listed below: ") %>
 					<%= text_field_tag(:item) %>
 					<%= hidden_field_tag "campaign_id", @campaign.id %> 
 					<%= submit_tag("Add Item") %>

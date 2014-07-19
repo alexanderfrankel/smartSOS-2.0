@@ -25,8 +25,8 @@ def retrieve_data(asin)
     req = Vacuum.new
 
     req.configure(
-      aws_access_key_id:     ENV[:access_key_id],
-      aws_secret_access_key: ENV[:secret_access_key],
+      aws_access_key_id:     'AKIAJNNOEFBNX4GHCD7Q',
+      aws_secret_access_key: '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',
       associate_tag:         'sm0cd-2'
     )
 

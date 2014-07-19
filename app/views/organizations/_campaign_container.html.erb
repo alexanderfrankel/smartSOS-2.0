@@ -29,30 +29,9 @@
         <div class="detail-footer">
 
           <div class="progress">
-            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: <%=campaign.percentage_goal_complete%>%">
+            <div class="progress-bar " role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: <%=campaign.percentage_goal_complete%>%">
             </div>
           </div>
-
-
-
-          <% i = 0 %>
-          <% campaign.pledges.each do |pledge| %>
-          <% i = i + 1 %>
-          <form id="amazon" method="GET" action="http://www.amazon.com/gp/aws/cart/add.html" target="_blank">
-            <input type="hidden" name="AWSAccessKeyId" value=ENV["secret_access_key"] />
-            <input type="hidden" name="AssociateTag" value="Associate Tag" />
-            <input type="hidden" name="ASIN.<%="#{i}"%>" value="<%=pledge.request.item.asin%>" />
-            <input type="hidden" name="Quantity.<%="#{i}"%>" value="<%=pledge.quantity%>" />
-
-
-            <% end %>
-
-            <%= link_to "View/Edit", campaign_path(campaign.id), class: "btn btn-primary", role: "button" %>
-            <!-- <a href="" class="btn btn-primary" role="button">View/Edit</a> -->
-            <% if  campaign.pledges.count > 0 %>
-              <input type="submit" name="add" class="btn btn-danger" value="Checkout" onclick="open_win()" />
-            <% end %>
-          </form>
 
         </div>
       </div>

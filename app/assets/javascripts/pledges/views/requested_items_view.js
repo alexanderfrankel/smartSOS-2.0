@@ -11,9 +11,9 @@ RequestedItemsView.prototype = {
             var requestedItemFormat = '<div class="requested-item" data-id="';
             requestedItemFormat += requestedItems[i].id;
             requestedItemFormat += '">';
-            requestedItemFormat += '<div class="requested-item-img">'
-            requestedItemFormat += '<img src="' + requestedItems[i].url + '">'
-            requestedItemFormat += '</div>'
+            // requestedItemFormat += '<div class="requested-item-img">'
+            // requestedItemFormat += '<img src="' + requestedItems[i].url + '">'
+            // requestedItemFormat += '</div>'
             requestedItemFormat += '<div class="requested-item-name">';
             requestedItemFormat += requestedItems[i].name;
             requestedItemFormat += '</div>';

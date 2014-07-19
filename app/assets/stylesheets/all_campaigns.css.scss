@@ -1,6 +1,16 @@
 @import "application_colorway";
 @import "dashboard";
 
+.bg-test {
+}
+
+
+.bg-test {
+	// background-color: red;
+	// background-image: url('http://www.talentedladiesclub.com/site/wp-content/uploads/team-work.jpg');
+	// background-image: url('http://creativitywindow.com/wp-content/uploads/2012/08/Autum-Fall-Background.jpg');
+}
+
 .title {
 	 font-family: 'Quicksand', sans-serif;
 }
@@ -56,9 +66,11 @@
 }
 
 .container.campaign-index{
-	border: 1px solid $jade;
+	// border: 1px solid $jade;
 	padding: 20px;
-	border-radius: 10px;
+	// background-color: #ECF0F1;
+	// background-image: url('http://hdw.datawallpaper.com/entertainment/our-world-desktop-background-335219.jpg')
+	// border-radius: 10px;
 }
 
 
@@ -101,4 +113,17 @@
 .btn.btn-primary.pledge{
   background-color: $coral;
   border: none;
+}
+
+
+.percent-donated p:nth-child(1) {
+	color: black;
+}
+
+.campaign-details {
+	background-color: #E4F1FE;
+}
+.detail-box p {
+	color: black;
+	// background-color: blue;
 }

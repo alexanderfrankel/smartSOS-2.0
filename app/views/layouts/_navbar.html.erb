@@ -1,4 +1,4 @@
- <nav class="navbar navbar-default " role="navigation">
+ <nav class="navbar navbar-inverse " role="navigation" id="test-nav">
    <div class="container-fluid">
      <div class="navbar-header">
        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -23,14 +23,7 @@
        </ul>
         <% end %>
 
-       <ul class="nav navbar-nav navbar-right">
-         <% if organization_logged_in? %>
-           <li id="org-btn"><%= link_to "I'm an Organization", organization_path(session[:organization_id]) %></li>
-         <% else %>
-           <li id="org-btn"><%= link_to "I'm an Organization", organizations_login_path %></li>
-         <% end %>
-         <li id="pledge-btn"><%= link_to "Make a pledge", campaigns_path %></li>
-       </ul>
+
      </div><!-- /.navbar-collapse -->
    </div><!-- /.container-fluid -->
  </nav>

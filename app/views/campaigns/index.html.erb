@@ -1,37 +1,39 @@
-<h1 class="text-center">Which campaign would you like to support?</h1>
-<hr>
- <h4 class="tag-line text-center">It's as Easy as 1-2-3</h4>
+<div class="bg-test">
+    <h1 class="text-center">Which campaign would you like to support?</h1>
+   
+     <h4 class="tag-line text-center">It's as Easy as 1-2-3</h4>
 
 
- <div class="container step-box">
+     <div class="container step-box">
 
- <div class="step-box">
-    <div class="step">
-      <div class="number">
-   	    <p>1</p>
-      </div>
-      <p>Pick Campaign</p>
+     <div class="step-box">
+        <div class="step">
+          <div class="number">
+       	    <p>1</p>
+          </div>
+          <p>Pick Campaign</p>
+        </div>
+
+        <div class="step">
+          <div class="number">
+           	<p>2</p>
+          </div>
+          <p>Select Items</p>
+        </div>
+
+        <div class="step">
+          <div class="number">
+            <p>3</p>
+          </div>
+          <p>Send!</p>
+     </div>
     </div>
 
-    <div class="step">
-      <div class="number">
-       	<p>2</p>
-      </div>
-      <p>Select Items</p>
     </div>
 
-    <div class="step">
-      <div class="number">
-        <p>3</p>
+    <div class="container campaign-index">
+      <div class="row">
+              <%= render 'one_campaign' %>
       </div>
-      <p>Send!</p>
- </div>
-</div>
-
-</div>
-
-<div class="container campaign-index">
-  <div class="row">
-          <%= render 'one_campaign' %>
-  </div>
+    </div>
 </div>

@@ -1,12 +1,24 @@
-<div id="container">
+<div  class="jumbotron">
 
 
-	<div id="quote">
-		<h1><em>"The purpose of human life is to serve, and to show compassion and the will to help <b>others</b><em>."</h1>
+	<div >
+
 	</div>
 
+	<div class="quote-container" id="quote">
+		<p><strong>THE NON-PROFIT WISHLIST PLATFORM</strong></p>
+		<p class="sub-quote"><em>"What we do for ourselves dies with us. What we do for others and the world remains and is immortal." - Albert Pike</em></p>
 
+       <ul class="nav navbar-nav ">
+         <% if organization_logged_in? %>
+           <li id="org-btn"><%= link_to "I'm an Organization", organization_path(session[:organization_id]) %></li>
+         <% else %>
+           <li id="org-btn"><%= link_to "I'm an Organization", organizations_login_path %></li>
+         <% end %>
+         <li id="pledge-btn"><%= link_to "Make a pledge", campaigns_path %></li>
+       </ul>
 
+	</div>
 </div>
 
 

@@ -10,8 +10,6 @@ PledgedItemsController.prototype = {
       url: '/campaigns/' + campaign_id + '/pledges',
       type: 'POST',
       data: this.formattedPledgeData()
-    }).done(function(response) {
-      window.location.href = '/campaigns';
     });
   },
 

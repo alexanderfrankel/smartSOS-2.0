@@ -1,7 +1,7 @@
 function animateHomepage() {
 	// $('#nav').hide().delay(1000).fadeIn(500);
 	// $('#nav').css({opacity: 0.0, visibility: "visible"}).delay(1000).css({opacity: 1.0, visibility: "visible"});
-	$('#quote').hide().fadeIn(3000);
+	$('#quote').hide().fadeIn(2000);
 }
 
 	var scrollY = 0;

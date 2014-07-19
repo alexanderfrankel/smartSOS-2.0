@@ -24,8 +24,32 @@
       <div class="pledged-items-title text-center"><h2>You Pledged</h2></div>
       <div class="pledged-items-total">$0.00</div>
       <div class="pledged-items-list">Click Item to Pledge</div>
-      <div><a href="#" class="btn btn-primary submit" id="pledged-items-submit">Submit Pledges</a></div>
+      <div><a href="#" class="btn btn-primary submit" id="pledged-items-submit">Submit Pledge</a></div>
+      <% if  current_donor.pledges.count > 0 %>
+      <div class="checkout-bt">
+        <input type="submit" name="add" class="btn btn-primary submit" value="Checkout" onclick="open_win()" />
+      </div>
+      <% end %>
     </div>
+
+
+
+    <% i = 0 %>
+    <% current_donor.pledges.each do |pledge| %>
+    <% i = i + 1 %>
+    <form id="amazon" method="GET" action="http://www.amazon.com/gp/aws/cart/add.html" target="_blank">
+      <input type="hidden" name="AWSAccessKeyId" value=ENV["secret_access_key"] />
+      <input type="hidden" name="AssociateTag" value="Associate Tag" />
+      <input type="hidden" name="ASIN.<%="#{i}"%>" value="<%=pledge.request.item.asin%>" />
+      <input type="hidden" name="Quantity.<%="#{i}"%>" value="<%=pledge.quantity%>" />
+
+
+      <% end %>
+
+      
+      <!-- <a href="" class="btn btn-primary" role="button">View/Edit</a> -->
+     
+    </form>
 
   </div>
   <script type="text/javascript">var requestModelData = <%= @request_model_data_json || '""'.html_safe %></script>

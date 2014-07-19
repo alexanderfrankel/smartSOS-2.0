@@ -1,7 +1,10 @@
 @import "application_colorway";
 
 #dashboard-container{
+  margin-top: 50px;
   padding-top: 20px;
+  background-color: black;
+
   // opacity: 0.8;
 }
 
@@ -16,7 +19,7 @@
   width: 146px;
   text-align: center;
   padding-top: 20px;
-  border-radius: 5px;
+  // border-radius: 5px;
 }
 
 .detail-content{
@@ -35,11 +38,17 @@
   padding: 10px;
   // border: 1px solid #cccccc;
   margin-bottom: 20px;
-  border-radius: 10px;
+  // border-radius: 10px;
   // border: 1px solid $bluegray;
-  background-color: $jade;
+  background: rgb(0, 0, 0); /* Fallback for older browsers without RGBA-support */
+  background: rgba(0, 0, 0, 0.5);
+  // box-shadow: 5px 10px 5px #888888;
 }
 
+
+.progress {
+  border-radius: 0px;
+}
 .campaign-holder.new{
   width: 320px;
   height: 400px;
@@ -67,8 +76,8 @@
   height: 250px;
   width: auto;
   border: 1px solid $bluegray;
-  background-color: white;
-  border-radius: 10px;
+  background-color: #E4F1FE;
+  // border-radius: 10px;
 }
 
 .edit-org{
