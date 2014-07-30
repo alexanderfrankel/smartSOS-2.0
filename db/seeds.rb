@@ -18,8 +18,6 @@ reset_database!
 #             B002GYVFOI B004E3EIEI B000KKB2OS B001U6MJCK B00363WZY2 B00363X1M2 B001HT720O
 #             B00IKLHDLU B004VLKLJE B00BG2BBSG B005IRWWZ6 B00008W2LC B00BLZ2312 ]
 
-# asins = %w[ B0069FTP0G B001949TKS B0039PV1QK B005FEGYJC B000GCRWCG B005VYRBRA B001YJHEDW ]
-
 asins = %w[ B0069FTP0G B001949TKS B0039PV1QK B005FEGYJC B000GCRWCG B005VYRBRA B001YJHEDW 
             B00BGN8PLG
             B00BLZ2312
@@ -53,8 +51,8 @@ def retrieve_data(asin)
     req = Vacuum.new
 
     req.configure(
-      aws_access_key_id:     ENV['access_key_id'],,
-      aws_secret_access_key: ENV['secret_access_key'],
+      aws_access_key_id:     'AKIAJNNOEFBNX4GHCD7Q',
+      aws_secret_access_key: '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',
       associate_tag:         'sm0cd-2'
     )
 

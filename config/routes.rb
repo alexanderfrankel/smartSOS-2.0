@@ -2,6 +2,7 @@ Smartsos::Application.routes.draw do
   root :to => 'pages#homepage'
 
   get '/aboutus' => 'pages#aboutus'
+  get '/howitworks' => 'pages#howitworks'
 
   resources :organizations, except: [:destroy, :index]
 
