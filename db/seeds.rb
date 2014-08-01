@@ -1,5 +1,5 @@
 require 'faker'
-require 'sucker'
+require 'vacuum'
 require 'yaml'
 
 def reset_database!
@@ -10,78 +10,83 @@ end
 
 reset_database!
 
+# ITEM SEED
 
+# Other ASINS:
+# asins = %w[ B0069FTP0G B001949TKS B0039PV1QK B005FEGYJC B000GCRWCG B005VYRBRA B001YJHEDW
+#             B002GYVFOI B004E3EIEI B000KKB2OS B001U6MJCK B00363WZY2 B00363X1M2 B001HT720O
+#             B00IKLHDLU B004VLKLJE B00BG2BBSG B005IRWWZ6 B00008W2LC B00BLZ2312 ]
 
-organizations = [["Red Cross", "redcross@redcross.org"], ["UNICEF", "unicef@unicef.org"]]
-
-# general_search_items = %w[soap toothbrush toothpaste tampons] #dog_food water canned_food batteries first_aid_kit baby_formula diapers dehydrated_food]
 asins = %w[ B0069FTP0G B001949TKS B0039PV1QK B005FEGYJC B000GCRWCG B005VYRBRA B001YJHEDW
-            B002GYVFOI B004E3EIEI B000KKB2OS B001U6MJCK B00363WZY2 B00363X1M2 B001HT720O
-            B00IKLHDLU B004VLKLJE B00BG2BBSG B005IRWWZ6 B00008W2LC B00BLZ2312 ]
+            B00BGN8PLG
+            B00BLZ2312
+            B008EIY0F6
+            B00CRCKDMY
+            B000R5NRPI
+            B00IT711GS
+            B0069FTP0G
+            B000GD653C
+            B0029NYQQA
+            B001LK6XHC
+            B0037DUAIY
+            B007DI14WA
+            B004CX2VSU
+            B004QM0OFE
+            B009443960
+            B000M5U6CU
+            B005FGPXDS
+            B001STX13U
+            B005M16TDY
+            B000GCRWCG
+            B004356WLY
+            B008DEYGJQ
+            B00ASBOP9S
+            B00AQIULD2
+            B00ASBOPDE
+            B001UB44SM]
 
-config = YAML.load_file(File.expand_path('config/secrets.yml', Rails.root))[Rails.env]
-
-# general_search_items.each do |item|
-asins.each do |asin|
-
-  # 3.times do |num|
-
-    worker = Sucker.new(
-      :associate_tag => 'sm0cd-2',
-      :key => config['access_key_id'] ,
-      :secret => config['secret_access_key'],
-      :locale => :us)
 
 
-    worker << {
-      # :operation => 'ItemSearch',
-      # :item_page => num,
-      # :search_index => 'HealthPersonalCare',
-      # :keywords => item,
-      # :response_group => 'ItemAttributes, ItemIds, Large',
-      # :maximum_price => '2000'
+def retrieve_data(asin)
 
-      :operation   =>  'ItemLookup',
-      :id_type      =>  'ASIN',
-      :item_id      =>  asin,
-      :response_group => 'ItemAttributes, ItemIds, Large'
+    req = Vacuum.new
+    config = YAML.load_file(File.expand_path('config/secrets.yml', Rails.root))[Rails.env]
+    req.configure(
+      aws_access_key_id:     config['access_key_id'],
+      aws_secret_access_key: config['secret_access_key'],
+      associate_tag:         'sm0cd-2'
+    )
+
+    params = {
+      'ItemId'        => asin,
+      'ResponseGroup' => 'ItemAttributes, ItemIds, Large'
+
     }
 
-
-    response = worker.get
-
-    response.each('Item') do |i|
-
-
-      if i['ItemAttributes']['ListPrice']
-        name = i['ItemAttributes']['Title']
-        asin = i['ASIN']
-        category = nil
-        price = i['ItemAttributes']['ListPrice']['Amount']
-
-
-        if i['ImageSets']['ImageSet'].class == Array
-          img_url = i['ImageSets']['ImageSet'][0]['LargeImage']['URL']
-        else
-          img_url = i['ImageSets']['ImageSet']['LargeImage']['URL']
-        end
-
-        item_attributes = {name: name,
-                            asin: asin,
-                            category: nil,
-                            img_url: img_url,
-                            price: price}
-
-      item = Item.new(item_attributes)
-      if item.save
-        puts "Item saved."
-      end
-
-      end
-    sleep 1
-    end
-  # end
+    return req.item_lookup(query: params).to_h
 end
+
+asins.each do |asin|
+  begin
+    item_data = retrieve_data(asin)
+    item_attributes = { name: item_data["ItemLookupResponse"]["Items"]["Item"]["ItemAttributes"]["Title"],
+                        asin: asin,
+                        category: item_data["ItemLookupResponse"]["Items"]["Item"]["ItemAttributes"]["ProductGroup"],
+                        img_url: item_data["ItemLookupResponse"]["Items"]["Item"]["SmallImage"]["URL"],
+                        price: item_data["ItemLookupResponse"]["Items"]["Item"]["OfferSummary"]["LowestNewPrice"]["Amount"]
+                      }
+
+    item = Item.new(item_attributes)
+    puts "Item saved." if item.save
+  rescue NoMethodError, Excon::Errors::ServiceUnavailable
+    STDOUT.puts "Failed to retrieve #{asin}"
+  end
+end
+
+
+# ORGANIZATION SEED
+
+organizations = [["Red Cross", "redcross@redcross.org"], ["UNICEF", "unicef@unicef.org"]]
 
 organizations.each do |org|
   puts organizations.count
@@ -100,6 +105,9 @@ organizations.each do |org|
                         url: Faker::Internet.url)
 end
 
+
+# DONOR SEED
+
 10.times do
   puts 'donor'
   Donor.create( first_name: Faker::Name.first_name,
@@ -109,34 +117,42 @@ end
                 password_confirmation: "yolo")
 end
 
-# Organization.all.each do |org|
-#   puts "*" * 100
-#   campaign_names = [  ["Hurricane Alex Relief", "Please help those affected by Hurricane Alex by donating today."],
-#                       ["Tsunami Relief", "Please help those affected by the tsunami by donating today."] ]
-#   campaign_names.each do |campaign_name|
-#     puts 'campaign'
-#     org.campaigns << Campaign.create(
-#                       name: campaign_name[0],
-#                       description: campaign_name[1],
-#                       end_date: '06-25-2014')
-#   end
-# end
+# CAMPAIGN SEED
 
-# Campaign.all.each do |campaign|
-#   items = Item.all
-#   10.times do
-#     puts 'request'
-#     Request.create( campaign_id: campaign.id,
-#                     item_id: items.pop.id,
-#                     quantity: rand(10))
-#   end
+Organization.all.each do |org|
+  puts "*" * 100
+  campaign_names = [  ["Hurricane Alex Relief", "Please help those affected by Hurricane Alex by donating today."],
+                      ["Tsunami Relief", "Please help those affected by the tsunami by donating today."] ]
+  campaign_names.each do |campaign_name|
+    puts 'campaign'
+    org.campaigns << Campaign.create(
+                      name: campaign_name[0],
+                      description: campaign_name[1],
+                      end_date: '06-25-2014')
+  end
+end
 
-#   requests = Request.all
-#   donors = Donor.all
-#   2.times do
-#     puts 'pledge'
-#     Pledge.create(  donor_id: donors.pop.id,
-#                     request_id: requests.pop.id,
-#                     quantity: rand(10))
-#   end
-# end
+
+# REQUEST SEED
+
+Campaign.all.each do |campaign|
+  items = Item.all
+  7.times do
+    puts 'request'
+    Request.create( campaign_id: campaign.id,
+                    item_id: items.pop.id,
+                    quantity: rand(10))
+  end
+
+
+# PLEDGE SEED
+
+  requests = Request.all
+  donors = Donor.all
+  2.times do
+    puts 'pledge'
+    Pledge.create(  donor_id: donors.pop.id,
+                    request_id: requests.pop.id,
+                    quantity: rand(10))
+  end
+end

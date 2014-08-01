@@ -5,8 +5,9 @@ class CreateItems < ActiveRecord::Migration
       t.string :name
       t.string :category
       t.string :img_url
-      t.integer :price  # stored as cents
-      
+      t.integer :price, :default => 0 # stored as cents
+			t.boolean :amazon_item?
+
       t.timestamps
     end
   end

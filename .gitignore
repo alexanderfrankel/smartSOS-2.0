@@ -1,4 +1,6 @@
 *.rbc
+*.swp
+.ruby-version
 *.sassc
 .sass-cache
 capybara-*.html
