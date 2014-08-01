@@ -19,6 +19,8 @@ asins = %w[ B0069FTP0G B001949TKS B0039PV1QK B005FEGYJC B000GCRWCG B005VYRBRA B0
             B002GYVFOI B004E3EIEI B000KKB2OS B001U6MJCK B00363WZY2 B00363X1M2 B001HT720O
             B00IKLHDLU B004VLKLJE B00BG2BBSG B005IRWWZ6 B00008W2LC B00BLZ2312 ]
 
+config = YAML.load_file(File.expand_path('config/secrets.yml', Rails.root))[Rails.env]
+
 # general_search_items.each do |item|
 asins.each do |asin|
 
@@ -26,8 +28,8 @@ asins.each do |asin|
 
     worker = Sucker.new(
       :associate_tag => 'sm0cd-2',
-      :key => ENV['access_key_id'],
-      :secret => ENV['secret_access_key'],
+      :key => config['access_key_id'] ,
+      :secret => config['secret_access_key'],
       :locale => :us)
 
 
@@ -138,17 +140,3 @@ end
 #                     quantity: rand(10))
 #   end
 # end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
