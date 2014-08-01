@@ -51,10 +51,10 @@ asins = %w[ B0069FTP0G B001949TKS B0039PV1QK B005FEGYJC B000GCRWCG B005VYRBRA B0
 def retrieve_data(asin)
 
     req = Vacuum.new
-
+    config = YAML.load_file(File.expand_path('config/secrets.yml', Rails.root))[Rails.env]
     req.configure(
-      aws_access_key_id:     ENV[:access_key_id],
-      aws_secret_access_key: ENV[:secret_access_key],
+      aws_access_key_id:     config['access_key_id'],
+      aws_secret_access_key: config['secret_access_key'],
       associate_tag:         'sm0cd-2'
     )
 
@@ -67,16 +67,20 @@ def retrieve_data(asin)
 end
 
 asins.each do |asin|
-  item_data = retrieve_data(asin)
-  item_attributes = { name: item_data["ItemLookupResponse"]["Items"]["Item"]["ItemAttributes"]["Title"],
-                      asin: asin,
-                      category: item_data["ItemLookupResponse"]["Items"]["Item"]["ItemAttributes"]["ProductGroup"],
-                      img_url: item_data["ItemLookupResponse"]["Items"]["Item"]["SmallImage"]["URL"],
-                      price: item_data["ItemLookupResponse"]["Items"]["Item"]["OfferSummary"]["LowestNewPrice"]["Amount"]
-                    }
+  begin
+    item_data = retrieve_data(asin)
+    item_attributes = { name: item_data["ItemLookupResponse"]["Items"]["Item"]["ItemAttributes"]["Title"],
+                        asin: asin,
+                        category: item_data["ItemLookupResponse"]["Items"]["Item"]["ItemAttributes"]["ProductGroup"],
+                        img_url: item_data["ItemLookupResponse"]["Items"]["Item"]["SmallImage"]["URL"],
+                        price: item_data["ItemLookupResponse"]["Items"]["Item"]["OfferSummary"]["LowestNewPrice"]["Amount"]
+                      }
 
-  item = Item.new(item_attributes)
-  puts "Item saved." if item.save
+    item = Item.new(item_attributes)
+    puts "Item saved." if item.save
+  rescue NoMethodError, Excon::Errors::ServiceUnavailable
+    STDOUT.puts "Failed to retrieve #{asin}"
+  end
 end
 
 
