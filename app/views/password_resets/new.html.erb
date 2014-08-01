@@ -1,0 +1,9 @@
+<div class="password-reset">
+  <%= form_tag password_resets_path do %>
+  <p>
+    <%= label_tag :email %> <br>
+    <%= text_field_tag :email, params[:email], class: "form-control" %>
+  </p>
+  <%= submit_tag(value = "Submit", class:'btn btn-info btn-sm') %>  
+  <% end %>
+</div>
