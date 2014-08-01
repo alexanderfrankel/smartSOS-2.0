@@ -9,6 +9,7 @@ ready = function() {
   appController = new ApplicationController(requestedItemsController, pledgedItemsController);
   appController.listenForPledge();
   appController.listenForPledgesSubmit();
+  appController.listenForPledgesRemove();
 
 };
 

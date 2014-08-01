@@ -20,6 +20,15 @@ RequestedItemsList.prototype = {
     this.updateTotal();
   },
 
+  increaseQuantity: function(request) {
+    for(var i=0; i<this.requests.length; i++) {
+      if (request === this.requests[i]) {
+        this.requests[i].quantity++;
+      }
+    }
+    this.updateTotal();
+  },
+
   updateTotal: function() {
     this.total = 0;
     for(var i=0; i<this.requests.length; i++) {

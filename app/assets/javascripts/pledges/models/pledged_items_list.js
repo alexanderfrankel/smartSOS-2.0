@@ -23,6 +23,18 @@ PledgedItemsList.prototype = {
         return false;
     },
 
+    removePledge: function(pledge_id) {
+      for ( var i = 0; i < this.pledges.length; i++) {
+        if(this.pledges[i].id === pledge_id) {
+          this.pledges[i].quantity--;
+          if(this.pledges[i].quantity === 0) {
+            this.pledges.splice(i, 1)
+          }
+        }
+      }
+      this.updateTotal();
+    },
+
     updateTotal: function() {
         this.total = 0;
         for (var i = 0; i < this.pledges.length; i++) {
