@@ -54,8 +54,8 @@ def retrieve_data(asin)
 
     req = Vacuum.new
     req.configure(
-      aws_access_key_id:     CONFIG["access_key_id"],
-      aws_secret_access_key: CONFIG["secret_access_key"],
+      aws_access_key_id:     Rails.application.secrets['access_key_id'],
+      aws_secret_access_key: Rails.application.secrets['secret_access_key'],
       associate_tag:         'sm0cd-2'
     )
 
@@ -150,7 +150,7 @@ end
 # REQUEST SEED
 
 Campaign.all.each do |campaign|
-  items = Item.all
+  items = Item.all.to_a
   7.times do
     puts 'request'
     Request.create( campaign_id: campaign.id,
@@ -161,8 +161,8 @@ Campaign.all.each do |campaign|
 
 # PLEDGE SEED
 
-  requests = Request.all
-  donors = Donor.all
+  requests = Request.all.to_a
+  donors = Donor.all.to_a
   2.times do
     puts 'pledge'
     Pledge.create(  donor_id: donors.pop.id,
