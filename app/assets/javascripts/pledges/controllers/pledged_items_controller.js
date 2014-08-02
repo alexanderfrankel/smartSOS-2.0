@@ -4,6 +4,11 @@ function PledgedItemsController(pledgedItemsView) {
 }
 
 PledgedItemsController.prototype = {
+
+  listen: function() {
+
+  },
+
   submitPledgedItems: function() {
     var campaign_id = $('.dashboard-title').data('id');
     $.ajax({

@@ -5,6 +5,14 @@ function RequestedItemsController(view) {
 }
 
 RequestedItemsController.prototype = {
+  listen: function(){
+    var self = this;
+    $(document).on('click', '.requested-item', function(event) {
+      var item_id = $(this).data('id')
+      self.transferItem(item_id, app.pledgedItemsController.list)
+      app.pledgedItemsController.render_list();
+    });
+  },
   render_list: function(){
     this.view.render();
   },

@@ -1,18 +1,11 @@
 var ApplicationController = function(requestedItemsController, pledgedItemsController) {
     this.requestedItemsController = requestedItemsController;
     this.pledgedItemsController = pledgedItemsController;
+    requestedItemsController.listen();
+    pledgedItemsController.listen();
 };
 
 ApplicationController.prototype = {
-  listenForPledge: function() {
-    var self = this;
-    $(document).on('click', '.requested-item', function(event) {
-      var item_id = $(this).data('id')
-      self.requestedItemsController.transferItem(item_id, self.pledgedItemsController.list)
-      self.pledgedItemsController.render_list();
-    });
-  },
-
   listenForPledgesSubmit: function() {
     var self = this;
     $(document).on('click', '#pledged-items-submit', function(event) {
