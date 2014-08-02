@@ -1,9 +1,19 @@
-function PledgedItemsList(items) {
-    this.items = items;
+function PledgedItemsList(registry) {
+    this.items = [];
     this.total = 0;
+  this.registry = registry;
+  this.populate();
+  this.updateTotal();
 }
 
 PledgedItemsList.prototype = {
+  populate: function() {
+    for(var i = 0; i < this.registry.length; i++) {
+      this.items.push(this.registry[i]);
+    }
+    this.updateTotal();
+  },
+
     increaseQuantity: function(item_id) {
         var existingPledge = this.pledgeExists(item_id);
         if (existingPledge) {

@@ -1,6 +1,7 @@
 function PledgedItemsController(list) {
   this.list = list;
   this.view = new PledgedItemsView(list);
+  this.render_list();
 }
 
 PledgedItemsController.prototype = {
