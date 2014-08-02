@@ -35,7 +35,7 @@ ApplicationController.prototype = {
     for(var i=0; i<requestModelData.length; i++) {
       if (requestModelData[i].id === item_id) {
         if (requestModelData[i].quantity > 0) {
-          this.requestedItemsController.requestedItemsList.reduceQuantity(requestModelData[i]);
+          this.requestedItemsController.list.reduceQuantity(requestModelData[i]);
           this.pledgedItemsController.pledgedItemsList.addPledge(requestModelData[i]);
         }
       }
@@ -43,11 +43,11 @@ ApplicationController.prototype = {
   },
 
   transferItemBack: function(item_id) {
-    for(var i=0; i<self.requestedItemsController.requestedItemsList.requests.length; i++) {
+    for(var i=0; i<self.requestedItemsController.list.requests.length; i++) {
 
-      if (self.requestedItemsController.requestedItemsList.requests[i].id === item_id) {
+      if (self.requestedItemsController.list.requests[i].id === item_id) {
 
-        this.requestedItemsController.requestedItemsList.increaseQuantity(self.requestedItemsController.requestedItemsList.requests[i]);
+        this.requestedItemsController.list.increaseQuantity(self.requestedItemsController.list.requests[i]);
         this.pledgedItemsController.pledgedItemsList.removePledge(item_id);
 
       }

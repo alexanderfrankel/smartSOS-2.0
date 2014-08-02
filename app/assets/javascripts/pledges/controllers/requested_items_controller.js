@@ -1,11 +1,11 @@
 function RequestedItemsController(requestedItemsView) {
-  this.requestedItemsList = requestedItemsView.list;
+  this.list = requestedItemsView.list;
   this.requestedItemsView = requestedItemsView;
 }
 
 RequestedItemsController.prototype = {
   init: function() {
-    this.requestedItemsView.render(this.requestedItemsList);
+    this.requestedItemsView.render(this.list);
   },
 
   render_list: function(){
