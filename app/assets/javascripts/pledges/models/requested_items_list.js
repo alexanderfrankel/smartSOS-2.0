@@ -1,8 +1,8 @@
 function RequestedItemsList(items) {
   this.requests = [];
+  this.total = 0;
   this.items = items;
   this.populate();
-  this.total = 0;
   this.updateTotal();
 }
 

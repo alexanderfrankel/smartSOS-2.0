@@ -3,7 +3,6 @@ ready = function() {
 
   requestedItemsController = new RequestedItemsController(new RequestedItemsView(new RequestedItemsList(requestModelData))
 );
-  requestedItemsController.init()
 
   pledgedItemsController = new PledgedItemsController(new PledgedItemsList, new PledgedItemsView);
 
