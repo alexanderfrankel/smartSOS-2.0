@@ -5,8 +5,6 @@ ready = function() {
   pledgedItemsController = new PledgedItemsController(new PledgedItemsView(new PledgedItemsList));
 
   appController = new ApplicationController(requestedItemsController, pledgedItemsController);
-  appController.listenForPledgesSubmit();
-  appController.listenForPledgesRemove();
 
   window.app = appController;
 

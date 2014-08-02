@@ -6,7 +6,17 @@ function PledgedItemsController(pledgedItemsView) {
 PledgedItemsController.prototype = {
 
   listen: function() {
-
+    var self = this;
+    $(document).on('click', '#pledged-items-submit', function(event) {
+      event.preventDefault();
+      app.submitPledgedItems();
+    })
+    $(document).on('click', '.pledged-item', function(event) {
+      event.preventDefault();
+      app.transferItemBack($(this).data('id'));
+      app.pledgedItemsController.pledgedItemsView.render(app.pledgedItemsController.list);
+      app.requestedItemsController.render_list();
+    })
   },
 
   submitPledgedItems: function() {
