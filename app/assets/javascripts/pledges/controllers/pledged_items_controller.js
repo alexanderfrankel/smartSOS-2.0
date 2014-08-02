@@ -1,5 +1,5 @@
 function PledgedItemsController(pledgedItemsView) {
-  this.pledgedItemsList = pledgedItemsView.list;
+  this.list = pledgedItemsView.list;
   this.pledgedItemsView = pledgedItemsView;
 }
 
@@ -16,7 +16,7 @@ PledgedItemsController.prototype = {
   },
 
   formattedPledgeData: function() {
-    var pledges = this.pledgedItemsList.pledges
+    var pledges = this.list.pledges
     var formattedPledgeData = []
     for(var i=0; i < pledges.length; i++) {
       formattedPledgeData.push({"request_id": pledges[i].id, "quantity": pledges[i].quantity})

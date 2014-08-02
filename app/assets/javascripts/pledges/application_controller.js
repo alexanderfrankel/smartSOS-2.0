@@ -8,7 +8,7 @@ ApplicationController.prototype = {
     var self = this;
     $(document).on('click', '.requested-item', function(event) {
       var item_id = $(this).data('id')
-      self.requestedItemsController.transferItem(item_id, self.pledgedItemsController.pledgedItemsList)
+      self.requestedItemsController.transferItem(item_id, self.pledgedItemsController.list)
       self.pledgedItemsController.render_list();
     });
   },
@@ -26,7 +26,7 @@ ApplicationController.prototype = {
     $(document).on('click', '.pledged-item', function(event) {
       event.preventDefault();
       self.transferItemBack($(this).data('id'));
-      self.pledgedItemsController.pledgedItemsView.render(self.pledgedItemsController.pledgedItemsList);
+      self.pledgedItemsController.pledgedItemsView.render(self.pledgedItemsController.list);
       self.requestedItemsController.render_list();
     })
   },
@@ -37,7 +37,7 @@ ApplicationController.prototype = {
       if (self.requestedItemsController.list.requests[i].id === item_id) {
 
         this.requestedItemsController.list.increaseQuantity(self.requestedItemsController.list.requests[i]);
-        this.pledgedItemsController.pledgedItemsList.removePledge(item_id);
+        this.pledgedItemsController.list.removePledge(item_id);
 
       }
     }
