@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.0.0'
+# ruby '2.0.0'
 
 gem 'rails', '4.0.2'
 
@@ -33,7 +33,7 @@ group :doc do
   gem 'sdoc', '~> 0.4.0', require: false
 end
 
-group :test, :development do 
+group :test, :development do
   gem 'rspec-rails', '~> 2.14'
   gem 'factory_girl_rails', '~> 4.2.1'
 end

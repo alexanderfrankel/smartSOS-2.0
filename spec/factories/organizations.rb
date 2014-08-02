@@ -13,9 +13,15 @@ FactoryGirl.define do
     phone { '1234567890' }
     description { Faker::Lorem.paragraph }
     url { Faker::Internet.url }
+    approved_at { DateTime.current() }
 
     factory :invalid_organization do
       name nil
     end
+
+    factory :pending_organization do
+      approved_at nil
+    end
+
   end
 end

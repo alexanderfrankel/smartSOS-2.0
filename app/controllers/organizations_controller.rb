@@ -1,7 +1,6 @@
 class OrganizationsController < ApplicationController
   before_action :set_organization, only: [:show, :edit, :update]
   before_action :logged_in?, only: [:show, :edit, :update]
-
   def show
     # check if current organization if equal to @organization
   end
@@ -14,9 +13,8 @@ class OrganizationsController < ApplicationController
     @organization = Organization.new(organization_params)
 
     if @organization.save
-      session[:organization_id] = @organization.id
-      flash[:success] = "Your organization was created successfully"
-      redirect_to organization_path(@organization)
+      flash[:success] = "Your account is being processed. You will recive an email when it is approved."
+      redirect_to root_path
     else
       flash.now.alert = "Apologies. Your Organization has not been registered."
       render 'new'
