@@ -1,6 +1,6 @@
-function PledgedItemsController(pledgedItemsView) {
-  this.list = pledgedItemsView.list;
-  this.pledgedItemsView = pledgedItemsView;
+function PledgedItemsController(view) {
+  this.list = view.list;
+  this.view = view;
 }
 
 PledgedItemsController.prototype = {
@@ -40,6 +40,6 @@ PledgedItemsController.prototype = {
   },
 
   render_list: function() {
-    this.pledgedItemsView.render();
+    this.view.render();
   }
 }
