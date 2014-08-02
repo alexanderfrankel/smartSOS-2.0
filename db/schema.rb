@@ -40,7 +40,8 @@ ActiveRecord::Schema.define(version: 20140802150422) do
     t.string   "name"
     t.string   "category"
     t.string   "img_url"
-    t.integer  "price"
+    t.integer  "price",        default: 0
+    t.boolean  "amazon_item?"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -74,6 +75,7 @@ ActiveRecord::Schema.define(version: 20140802150422) do
     t.integer  "campaign_id"
     t.integer  "item_id"
     t.integer  "quantity"
+    t.string   "due_date"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
