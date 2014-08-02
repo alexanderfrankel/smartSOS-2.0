@@ -14,7 +14,7 @@ PledgedItemsController.prototype = {
     $(document).on('click', '.pledged-item', function(event) {
       event.preventDefault();
       app.transferItemBack($(this).data('id'));
-      app.pledgedItemsController.pledgedItemsView.render(app.pledgedItemsController.list);
+      app.pledgedItemsController.render_list();
       app.requestedItemsController.render_list();
     })
   },
