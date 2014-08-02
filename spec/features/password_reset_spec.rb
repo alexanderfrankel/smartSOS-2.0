@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe "Password reset" do
-  it "sends an email to the organization user, containing the link to reset their pasword, when the organization user requests a password reset" do
+  it "sends an email to the organization user, containing the link to reset their pasword, when the organization user requests a password reset, letting the user reset their password" do
     ActionMailer::Base.deliveries.clear
 
     email = "foo@bar.com"
@@ -19,6 +19,16 @@ describe "Password reset" do
     email = ActionMailer::Base.deliveries.first
 
     org.reload
-    assert email.body.to_s =~ /#{password_reset_path(org.password_reset_token)}/
+    assert email.body.to_s =~ /#{edit_password_reset_path(org.password_reset_token)}/
+
+    visit edit_password_reset_path(org.password_reset_token)
+    
+    new_password = "newpassword"
+    fill_in :password, with: new_password
+    fill_in :password_confirmation, with: new_password
+
+    click_on "Submit"
+
+    assert page.body =~ /Check your email/
   end
 end
