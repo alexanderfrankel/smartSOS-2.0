@@ -15,9 +15,7 @@ RequestedItemsView.prototype = {
     },
 
     render_item: function(item){
-      var requestedItemFormat = '<div class="requested-item" data-id="';
-      requestedItemFormat += item.id;
-      requestedItemFormat += '">';
+      var requestedItemFormat = '<div class="requested-item" data-id="' + item.id + '">';
       requestedItemFormat += '<div class="requested-item-img">'
       requestedItemFormat += '<img src="' + item.url + '">'
       requestedItemFormat += '</div>'
