@@ -19,8 +19,9 @@ RequestedItemsController.prototype = {
   },
 
   transfer: function(item_id, to) {
-    this.list.reduceQuantity(item_id)
-    to.increaseQuantity(item_id)
+    if(this.list.reduceQuantity(item_id)){
+      to.increaseQuantity(item_id);
+    }
     this.render_list();
   }
 }

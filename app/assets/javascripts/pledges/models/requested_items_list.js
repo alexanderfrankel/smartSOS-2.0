@@ -15,22 +15,23 @@ RequestedItemsList.prototype = {
   },
 
   reduceQuantity: function(item_id) {
-    for(var i=0; i<this.items.length; i++) {
-      if (item_id === this.items[i].id) {
-        if(this.items[i].quantity > 0) {
-          this.items[i].quantity--;
-        }
-      }
+    if(this.item(item_id).quantity > 0) {
+      this.item(item_id).quantity--;
     }
     this.updateTotal();
+    return true
+  },
+
+  item: function(item_id){
+    for(var i=0; i<this.items.length; i++) {
+      if (item_id === this.items[i].id) {
+        return this.items[i];
+      }
+    }
   },
 
   increaseQuantity: function(item_id) {
-    for(var i=0; i<this.items.length; i++) {
-      if (item_id === this.items[i].id) {
-        this.items[i].quantity++;
-      }
-    }
+    this.item(item_id).quantity++;
     this.updateTotal();
   },
 
