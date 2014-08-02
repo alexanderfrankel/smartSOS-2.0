@@ -13,6 +13,7 @@ RequestedItemsController.prototype = {
       app.pledgedItemsController.render_list();
     });
   },
+
   render_list: function(){
     this.view.render();
   },

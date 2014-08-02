@@ -23,9 +23,9 @@ RequestedItemsList.prototype = {
     this.updateTotal();
   },
 
-  increaseQuantity: function(request) {
+  increaseQuantity: function(item_id) {
     for(var i=0; i<this.requests.length; i++) {
-      if (request === this.requests[i]) {
+      if (item_id === this.requests[i].id) {
         this.requests[i].quantity++;
       }
     }
