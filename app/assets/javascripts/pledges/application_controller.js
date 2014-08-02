@@ -7,7 +7,8 @@ ApplicationController.prototype = {
   listenForPledge: function() {
     var self = this;
     $(document).on('click', '.requested-item', function(event) {
-      self.transferItem($(this).data('id'));
+      var item_id = $(this).data('id')
+      self.requestedItemsController.transferItem(item_id, self.pledgedItemsController.pledgedItemsList)
       self.pledgedItemsController.pledgedItemsView.render(self.pledgedItemsController.pledgedItemsList);
       self.requestedItemsController.render_list();
     });
@@ -29,17 +30,6 @@ ApplicationController.prototype = {
       self.pledgedItemsController.pledgedItemsView.render(self.pledgedItemsController.pledgedItemsList);
       self.requestedItemsController.render_list();
     })
-  },
-
-  transferItem: function(item_id) {
-    for(var i=0; i<requestModelData.length; i++) {
-      if (requestModelData[i].id === item_id) {
-        if (requestModelData[i].quantity > 0) {
-          this.requestedItemsController.list.reduceQuantity(requestModelData[i]);
-          this.pledgedItemsController.pledgedItemsList.addPledge(requestModelData[i]);
-        }
-      }
-    }
   },
 
   transferItemBack: function(item_id) {
