@@ -5,8 +5,4 @@ var ApplicationController = function(requestedItemsController, pledgedItemsContr
     pledgedItemsController.listen();
 };
 
-ApplicationController.prototype = {
-  transferItem: function(item_id, from, to) {
-    from.transfer(item_id, to);
-  }
-}
+ApplicationController.prototype = {};
