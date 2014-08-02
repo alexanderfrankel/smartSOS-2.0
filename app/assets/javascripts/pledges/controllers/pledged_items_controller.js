@@ -31,7 +31,7 @@ PledgedItemsController.prototype = {
   },
 
   formattedPledgeData: function() {
-    var pledges = this.list.pledges
+    var pledges = this.list.items
     var formattedPledgeData = []
     for(var i=0; i < pledges.length; i++) {
       formattedPledgeData.push({"request_id": pledges[i].id, "quantity": pledges[i].quantity})
