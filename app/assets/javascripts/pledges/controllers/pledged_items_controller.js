@@ -13,7 +13,7 @@ PledgedItemsController.prototype = {
     })
     $(document).on('click', '.pledged-item', function(event) {
       event.preventDefault();
-      self.transferItem($(this).data('id'), app.requestedItemsController.list)
+      self.transfer($(this).data('id'), app.requestedItemsController.list)
       app.requestedItemsController.render_list();
     })
   },
@@ -42,10 +42,9 @@ PledgedItemsController.prototype = {
     this.view.render();
   },
 
-  transferItem: function(item_id, other_list) {
-    var items = this.list.items;
+  transfer: function(item_id, to) {
     this.list.reduceQuantity(item_id)
-    other_list.increaseQuantity(item_id)
+    to.increaseQuantity(item_id)
     this.render_list();
   }
 }

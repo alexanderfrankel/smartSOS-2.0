@@ -17,7 +17,9 @@ RequestedItemsList.prototype = {
   reduceQuantity: function(request) {
     for(var i=0; i<this.requests.length; i++) {
       if (request === this.requests[i]) {
-        this.requests[i].quantity--;
+        if(this.requests[i].quantity > 0) {
+          this.requests[i].quantity--;
+        }
       }
     }
     this.updateTotal();

@@ -9,7 +9,7 @@ RequestedItemsController.prototype = {
     var self = this;
     $(document).on('click', '.requested-item', function(event) {
       var item_id = $(this).data('id')
-      self.transferItem(item_id, app.pledgedItemsController.list)
+      self.transfer(item_id, app.pledgedItemsController.list)
       app.pledgedItemsController.render_list();
     });
   },
@@ -18,16 +18,9 @@ RequestedItemsController.prototype = {
     this.view.render();
   },
 
-  transferItem: function(item_id, other_list) {
-    var items = this.list.items;
-    for(var i=0; i< items.length; i++) {
-      if (items[i].id === item_id) {
-        if (items[i].quantity > 0) {
-          this.list.reduceQuantity(items[i]);
-          other_list.increaseQuantity(items[i]);
-        }
-      }
-    }
+  transfer: function(item_id, to) {
+    this.list.reduceQuantity(item_id)
+    to.increaseQuantity(item_id)
     this.render_list();
-  },
+  }
 }

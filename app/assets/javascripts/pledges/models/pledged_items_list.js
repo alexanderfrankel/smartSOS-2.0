@@ -4,12 +4,17 @@ function PledgedItemsList() {
 }
 
 PledgedItemsList.prototype = {
-    increaseQuantity: function(newPledge) {
-        var existingPledge = this.pledgeExists(newPledge.id);
+    increaseQuantity: function(item_id) {
+        var existingPledge = this.pledgeExists(item_id);
         if (existingPledge) {
             existingPledge.quantity++;
         } else {
-            this.items.push(new Pledge(newPledge.id, newPledge.name, newPledge.price, newPledge.url));
+          for(var i=0;i < registry.length; i++){
+            item = registry[i];
+            if(item_id === item.id){
+              this.items.push(new Pledge(item.id, item.name, item.price, item.url));
+            }
+          }
         }
         this.updateTotal();
     },
