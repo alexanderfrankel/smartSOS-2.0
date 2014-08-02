@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140801215459) do
+ActiveRecord::Schema.define(version: 20140802150422) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,19 +46,20 @@ ActiveRecord::Schema.define(version: 20140801215459) do
   end
 
   create_table "organizations", force: true do |t|
-    t.string   "name",                 null: false
-    t.string   "street",               null: false
-    t.string   "city",                 null: false
-    t.string   "state",                null: false
-    t.string   "zipcode",              null: false
-    t.string   "email",                null: false
+    t.string   "name",                   null: false
+    t.string   "street",                 null: false
+    t.string   "city",                   null: false
+    t.string   "state",                  null: false
+    t.string   "zipcode",                null: false
+    t.string   "email",                  null: false
     t.string   "password_digest"
-    t.string   "phone",                null: false
-    t.text     "description",          null: false
+    t.string   "phone",                  null: false
+    t.text     "description",            null: false
     t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "password_reset_token"
+    t.datetime "reset_token_expires_at"
   end
 
   create_table "pledges", force: true do |t|
