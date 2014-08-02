@@ -10,11 +10,12 @@ RequestedItemsController.prototype = {
   },
 
   transferItem: function(item_id, other_list) {
-    for(var i=0; i<requestModelData.length; i++) {
-      if (requestModelData[i].id === item_id) {
-        if (requestModelData[i].quantity > 0) {
-          this.list.reduceQuantity(requestModelData[i]);
-          other_list.addPledge(requestModelData[i]);
+    var items = this.list.items;
+    for(var i=0; i< items.length; i++) {
+      if (items[i].id === item_id) {
+        if (items[i].quantity > 0) {
+          this.list.reduceQuantity(items[i]);
+          other_list.addPledge(items[i]);
         }
       }
     }
