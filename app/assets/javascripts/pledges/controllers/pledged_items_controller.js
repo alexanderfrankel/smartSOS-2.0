@@ -9,7 +9,7 @@ PledgedItemsController.prototype = {
     var self = this;
     $(document).on('click', '#pledged-items-submit', function(event) {
       event.preventDefault();
-      app.submitPledgedItems();
+      self.submitPledgedItems();
     })
     $(document).on('click', '.pledged-item', function(event) {
       event.preventDefault();
