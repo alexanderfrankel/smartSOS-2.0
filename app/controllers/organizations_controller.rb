@@ -4,6 +4,11 @@ class OrganizationsController < ApplicationController
 
   def show
     # check if current organization if equal to @organization
+    if @organization.enabled_at.nil?
+      redirect_to "/"
+      flash[:alert] = "Your organization has not yet been approved. Please check later."
+      return
+    end
   end
 
   def new

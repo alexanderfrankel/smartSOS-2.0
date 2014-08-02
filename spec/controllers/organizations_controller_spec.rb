@@ -8,6 +8,15 @@ describe OrganizationsController do
       get :show, id: organization
       expect(assigns(:organization)).to eq organization
     end
+
+    it 'redirects to home if the organization is not yet approved' do
+      organization = create(:unapproved_organization)
+      org_obj = Organization.where(:id => organization.id).first
+      request.session[:organization_id] = org_obj.id
+      get :show, id: organization
+      response.should redirect_to "/"
+    end
+
   end
 
   describe 'GET #new' do
@@ -19,7 +28,7 @@ describe OrganizationsController do
 
   describe 'POST #create' do
     context 'with VALID attributes' do
-      it 'saves the new organization in the database' do
+      it 'saves the new, unapproved organization in the database' do
         expect {
           post :create, organization: attributes_for(:organization)
         }.to change(Organization, :count).by(1)

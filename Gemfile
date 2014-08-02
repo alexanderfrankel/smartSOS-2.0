@@ -34,6 +34,7 @@ group :doc do
 end
 
 group :test, :development do 
+  gem 'io-console'
   gem 'rspec-rails', '~> 2.14'
   gem 'factory_girl_rails', '~> 4.2.1'
   gem 'pry'
