@@ -7,8 +7,8 @@ RequestedItemsView.prototype = {
         $('.requested-items-total').text('$' + this.list.total.toFixed(2));
         $('.requested-items-list').empty();
 
-        for (var i = 0; i < this.list.requests.length; i++) {
-            $('.requested-items-list').append(this.render_item(this.list.requests[i]));
+        for (var i = 0; i < this.list.items.length; i++) {
+            $('.requested-items-list').append(this.render_item(this.list.items[i]));
         }
     },
 

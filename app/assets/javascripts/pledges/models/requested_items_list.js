@@ -1,24 +1,24 @@
-function RequestedItemsList(items) {
-  this.requests = [];
+function RequestedItemsList(registry) {
+  this.items = [];
   this.total = 0;
-  this.items = items;
+  this.registry = registry;
   this.populate();
   this.updateTotal();
 }
 
 RequestedItemsList.prototype = {
   populate: function() {
-    for(var i = 0; i < this.items.length; i++) {
-      this.requests.push(this.items[i]);
+    for(var i = 0; i < this.registry.length; i++) {
+      this.items.push(this.registry[i]);
     }
     this.updateTotal();
   },
 
-  reduceQuantity: function(request) {
-    for(var i=0; i<this.requests.length; i++) {
-      if (request === this.requests[i]) {
-        if(this.requests[i].quantity > 0) {
-          this.requests[i].quantity--;
+  reduceQuantity: function(item_id) {
+    for(var i=0; i<this.items.length; i++) {
+      if (item_id === this.items[i].id) {
+        if(this.items[i].quantity > 0) {
+          this.items[i].quantity--;
         }
       }
     }
@@ -26,9 +26,9 @@ RequestedItemsList.prototype = {
   },
 
   increaseQuantity: function(item_id) {
-    for(var i=0; i<this.requests.length; i++) {
-      if (item_id === this.requests[i].id) {
-        this.requests[i].quantity++;
+    for(var i=0; i<this.items.length; i++) {
+      if (item_id === this.items[i].id) {
+        this.items[i].quantity++;
       }
     }
     this.updateTotal();
@@ -36,8 +36,8 @@ RequestedItemsList.prototype = {
 
   updateTotal: function() {
     this.total = 0;
-    for(var i=0; i<this.requests.length; i++) {
-      this.total += this.requests[i].price * this.requests[i].quantity;
+    for(var i=0; i<this.items.length; i++) {
+      this.total += this.items[i].price * this.items[i].quantity;
     }
   }
 };
