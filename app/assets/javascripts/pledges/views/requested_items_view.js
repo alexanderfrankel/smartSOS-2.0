@@ -4,13 +4,11 @@ function RequestedItemsView(list) {
 
 RequestedItemsView.prototype = {
     render: function() {
-        var requestedItems = this.list.requests
-
         $('.requested-items-total').text('$' + this.list.total.toFixed(2));
         $('.requested-items-list').empty();
 
-        for (var i = 0; i < requestedItems.length; i++) {
-            $('.requested-items-list').append(this.render_item(requestedItems[i]));
+        for (var i = 0; i < this.list.requests.length; i++) {
+            $('.requested-items-list').append(this.render_item(this.list.requests[i]));
         }
     },
 
