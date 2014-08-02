@@ -1,5 +1,5 @@
-function PledgedItemsList() {
-    this.items = [];
+function PledgedItemsList(items) {
+    this.items = items;
     this.total = 0;
 }
 
