@@ -1,14 +1,15 @@
 function RequestedItemsList(items) {
   this.requests = [];
-  this.populate(items);
+  this.items = items;
+  this.populate();
   this.total = 0;
   this.updateTotal();
 }
 
 RequestedItemsList.prototype = {
-  populate: function(data) {
-    for(var i = 0; i < data.length; i++) {
-      this.requests.push(data[i]);
+  populate: function() {
+    for(var i = 0; i < this.items.length; i++) {
+      this.requests.push(this.items[i]);
     }
     this.updateTotal();
   },
