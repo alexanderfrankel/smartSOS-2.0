@@ -19,5 +19,6 @@ RequestedItemsController.prototype = {
         }
       }
     }
+    this.render_list();
   },
 }
