@@ -6,7 +6,10 @@ class PasswordResetsController < ApplicationController
     params.require(:email)
 
     if org = Organization.find_by_email(params[:email])
-      org.update_attribute(:password_reset_token, UUID.new.generate)
+      org.update_attributes(
+        :password_reset_token => UUID.new.generate,
+        :reset_token_expires_at => Time.now + 30.minutes
+      )
       PasswordResetMailer.reset_link(org).deliver
     end
 
@@ -16,8 +19,8 @@ class PasswordResetsController < ApplicationController
   end
 
   def edit 
-    @org = Organization.find_by_password_reset_token(params[:id])
-    unless @org
+    @org = Organization.find_by_password_reset_token(params[:id]) 
+    unless @org || @org.reset_token_expires_at < Time.now
       flash[:error] = "Sorry but your password reset appears to have been used or has expired"
       redirect_to root_path
     end
@@ -27,7 +30,10 @@ class PasswordResetsController < ApplicationController
     @org = Organization.find_by_password_reset_token(params[:id])
     @org.password = params[:password]
     @org.password_confirmation = params[:password_confirmation]
-    if  @org.save
+    if Time.now > @org.reset_token_expires_at
+      flash[:error] = "Your password reset has expired. Please request a password reset again."
+      redirect_to new_password_reset_path
+    elsif @org.save
       flash[:notice] = "Check your email for password reset instructions"
       redirect_to root_path
     else
