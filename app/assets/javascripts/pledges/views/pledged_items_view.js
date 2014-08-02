@@ -1,10 +1,12 @@
-function PledgedItemsView() {};
+function PledgedItemsView(list) {
+  this.list = list;
+};
 
 PledgedItemsView.prototype = {
-    render: function(pledgedItemsList) {
-        var pledgedItems = pledgedItemsList.pledges
+    render: function() {
+        var pledgedItems = this.list.pledges;
 
-        $('.pledged-items-total').text('$' + pledgedItemsList.total.toFixed(2));
+        $('.pledged-items-total').text('$' + this.list.total.toFixed(2));
 
         $('.pledged-items-list').empty();
 

@@ -1,5 +1,5 @@
-function PledgedItemsController(pledgedItemsList, pledgedItemsView) {
-  this.pledgedItemsList = pledgedItemsList;
+function PledgedItemsController(pledgedItemsView) {
+  this.pledgedItemsList = pledgedItemsView.list;
   this.pledgedItemsView = pledgedItemsView;
 }
 
@@ -22,5 +22,9 @@ PledgedItemsController.prototype = {
       formattedPledgeData.push({"request_id": pledges[i].id, "quantity": pledges[i].quantity})
     }
     return {"pledge": formattedPledgeData};
+  },
+
+  render_list: function() {
+    this.pledgedItemsView.render();
   }
 }
