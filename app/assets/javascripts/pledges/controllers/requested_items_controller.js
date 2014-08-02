@@ -5,7 +5,7 @@ function RequestedItemsController(view) {
 
 RequestedItemsController.prototype = {
   init: function() {
-    this.view.render(this.list);
+    this.render_list();
   },
 
   render_list: function(){
