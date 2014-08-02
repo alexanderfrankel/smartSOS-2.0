@@ -27,7 +27,7 @@ ApplicationController.prototype = {
       event.preventDefault();
       self.transferItemBack($(this).data('id'));
       self.pledgedItemsController.pledgedItemsView.render(self.pledgedItemsController.pledgedItemsList);
-      self.requestedItemsController.requestedItemsView.render(self.requestedItemsController.requestedItemsList);
+      self.requestedItemsController.render_list();
     })
   },
 
