@@ -1,10 +1,12 @@
-function RequestedItemsView() {};
+function RequestedItemsView(list) {
+  this.list = list;
+};
 
 RequestedItemsView.prototype = {
-    render: function(requestedItemsList) {
-        var requestedItems = requestedItemsList.requests
+    render: function() {
+        var requestedItems = this.list.requests
 
-        $('.requested-items-total').text('$' + requestedItemsList.total.toFixed(2));
+        $('.requested-items-total').text('$' + this.list.total.toFixed(2));
         $('.requested-items-list').empty();
 
         for (var i = 0; i < requestedItems.length; i++) {

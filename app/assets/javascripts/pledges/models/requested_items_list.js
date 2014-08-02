@@ -1,6 +1,8 @@
-function RequestedItemsList() {
+function RequestedItemsList(items) {
   this.requests = [];
+  this.populate(items);
   this.total = 0;
+  this.updateTotal();
 }
 
 RequestedItemsList.prototype = {

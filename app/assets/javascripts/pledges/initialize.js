@@ -1,7 +1,7 @@
 var ready;
 ready = function() {
 
-  requestedItemsController = new RequestedItemsController(new RequestedItemsList, new RequestedItemsView);
+  requestedItemsController = new RequestedItemsController(new RequestedItemsView(new RequestedItemsList(requestModelData)));
   requestedItemsController.init()
 
   pledgedItemsController = new PledgedItemsController(new PledgedItemsList, new PledgedItemsView);

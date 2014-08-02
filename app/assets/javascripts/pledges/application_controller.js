@@ -9,7 +9,7 @@ ApplicationController.prototype = {
     $(document).on('click', '.requested-item', function(event) {
       self.transferItem($(this).data('id'));
       self.pledgedItemsController.pledgedItemsView.render(self.pledgedItemsController.pledgedItemsList);
-      self.requestedItemsController.requestedItemsView.render(self.requestedItemsController.requestedItemsList);
+      self.requestedItemsController.render_list();
     });
   },
 
