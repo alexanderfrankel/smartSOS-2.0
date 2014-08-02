@@ -23,19 +23,10 @@ PledgedItemsController.prototype = {
     $.ajax({
       url: '/campaigns/' + campaign_id + '/pledges',
       type: 'POST',
-      data: this.formattedPledgeData()
+      data: this.list.data()
     }).done(function(response) {
       window.location.href = '/campaigns';
     });
-  },
-
-  formattedPledgeData: function() {
-    var pledges = this.list.items
-    var formattedPledgeData = []
-    for(var i=0; i < pledges.length; i++) {
-      formattedPledgeData.push({"request_id": pledges[i].id, "quantity": pledges[i].quantity})
-    }
-    return {"pledge": formattedPledgeData};
   },
 
   render_list: function() {

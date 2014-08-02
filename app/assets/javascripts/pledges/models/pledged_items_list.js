@@ -45,5 +45,14 @@ PledgedItemsList.prototype = {
         for (var i = 0; i < this.items.length; i++) {
             this.total += this.items[i].price * this.items[i].quantity;
         }
+    },
+
+    data: function(){
+      var formattedPledgeData = []
+      for(var i=0; i < this.items.length; i++) {
+        var pledge = this.items[i];
+        formattedPledgeData.push({"request_id": pledge.id, "quantity": pledge.quantity});
+      }
+      return {"pledge": formattedPledgeData};
     }
 }
