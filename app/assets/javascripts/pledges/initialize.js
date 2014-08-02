@@ -1,8 +1,8 @@
 var ready;
 ready = function() {
 
-  requestedItemsController = new RequestedItemsController(new RequestedItemsView(new RequestedItemsList(registry)));
-  pledgedItemsController = new PledgedItemsController(new PledgedItemsView(new PledgedItemsList));
+  requestedItemsController = new RequestedItemsController(new RequestedItemsList(registry));
+  pledgedItemsController = new PledgedItemsController(new PledgedItemsList);
 
   appController = new ApplicationController(requestedItemsController, pledgedItemsController);
 

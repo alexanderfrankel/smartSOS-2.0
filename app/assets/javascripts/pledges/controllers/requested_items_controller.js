@@ -1,6 +1,6 @@
-function RequestedItemsController(view) {
-  this.list = view.list;
-  this.view = view;
+function RequestedItemsController(list) {
+  this.list = list;
+  this.view = new RequestedItemsView(list);
   this.render_list();
 }
 
