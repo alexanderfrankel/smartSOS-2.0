@@ -6,15 +6,7 @@ var ApplicationController = function(requestedItemsController, pledgedItemsContr
 };
 
 ApplicationController.prototype = {
-  transferItemBack: function(item_id) {
-    for(var i=0; i<self.requestedItemsController.list.requests.length; i++) {
-
-      if (self.requestedItemsController.list.requests[i].id === item_id) {
-
-        this.requestedItemsController.list.increaseQuantity(self.requestedItemsController.list.requests[i]);
-        this.pledgedItemsController.list.reduceQuantity(item_id);
-
-      }
-    }
+  transferItem: function(item_id, from, to) {
+    from.transfer(item_id, to);
   }
 }
