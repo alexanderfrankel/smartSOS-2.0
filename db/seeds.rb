@@ -19,7 +19,7 @@ reset_database!
 #             B00IKLHDLU B004VLKLJE B00BG2BBSG B005IRWWZ6 B00008W2LC B00BLZ2312 ]
 
 
-asins = %w[ B0069FTP0G B001949TKS B0039PV1QK B005FEGYJC B000GCRWCG B005VYRBRA B001YJHEDW 
+asins = %w[ B0069FTP0G B001949TKS B0039PV1QK B005FEGYJC B000GCRWCG B005VYRBRA B001YJHEDW
             B00BGN8PLG
             B00BLZ2312
             B008EIY0F6
@@ -46,7 +46,7 @@ asins = %w[ B0069FTP0G B001949TKS B0039PV1QK B005FEGYJC B000GCRWCG B005VYRBRA B0
             B00AQIULD2
             B00ASBOPDE
             B001UB44SM]
-            
+
 
 
 def retrieve_data(asin)
@@ -128,6 +128,14 @@ end
                 password: "yolo",
                 password_confirmation: "yolo")
 end
+# TEST DONOR SEED
+
+  puts 'test donor'
+  Donor.create( first_name: "Tester",
+                last_name: "Tester",
+                email: "tester@email.com",
+                password: "tester",
+                password_confirmation: "tester")
 
 
 # CAMPAIGN SEED
