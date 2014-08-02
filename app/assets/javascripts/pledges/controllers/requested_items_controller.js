@@ -23,7 +23,7 @@ RequestedItemsController.prototype = {
       if (items[i].id === item_id) {
         if (items[i].quantity > 0) {
           this.list.reduceQuantity(items[i]);
-          other_list.addPledge(items[i]);
+          other_list.increaseQuantity(items[i]);
         }
       }
     }

@@ -4,7 +4,7 @@ function PledgedItemsList() {
 }
 
 PledgedItemsList.prototype = {
-    addPledge: function(newPledge) {
+    increaseQuantity: function(newPledge) {
         var existingPledge = this.pledgeExists(newPledge);
         if (existingPledge) {
             existingPledge.quantity++;
@@ -23,7 +23,7 @@ PledgedItemsList.prototype = {
         return false;
     },
 
-    removePledge: function(pledge_id) {
+    reduceQuantity: function(pledge_id) {
       for ( var i = 0; i < this.pledges.length; i++) {
         if(this.pledges[i].id === pledge_id) {
           this.pledges[i].quantity--;
