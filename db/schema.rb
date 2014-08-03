@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140802150422) do
+ActiveRecord::Schema.define(version: 20140803133817) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,27 +40,27 @@ ActiveRecord::Schema.define(version: 20140802150422) do
     t.string   "name"
     t.string   "category"
     t.string   "img_url"
-    t.integer  "price",        default: 0
-    t.boolean  "amazon_item?"
+    t.integer  "price"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "organizations", force: true do |t|
-    t.string   "name",                   null: false
-    t.string   "street",                 null: false
-    t.string   "city",                   null: false
-    t.string   "state",                  null: false
-    t.string   "zipcode",                null: false
-    t.string   "email",                  null: false
+    t.string   "name",                       null: false
+    t.string   "street",                     null: false
+    t.string   "city",                       null: false
+    t.string   "state",                      null: false
+    t.string   "zipcode",                    null: false
+    t.string   "email",                      null: false
     t.string   "password_digest"
-    t.string   "phone",                  null: false
-    t.text     "description",            null: false
+    t.string   "phone",                      null: false
+    t.text     "description",                null: false
     t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "password_reset_token"
     t.datetime "reset_token_expires_at"
+    t.string   "account_confirmation_token"
   end
 
   create_table "pledges", force: true do |t|
@@ -75,7 +75,6 @@ ActiveRecord::Schema.define(version: 20140802150422) do
     t.integer  "campaign_id"
     t.integer  "item_id"
     t.integer  "quantity"
-    t.string   "due_date"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

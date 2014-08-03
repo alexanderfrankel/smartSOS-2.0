@@ -16,6 +16,8 @@ Smartsos::Application.routes.draw do
 
   resources :password_resets
 
+  resources :confirm_account
+
   # SESSION ROUTES
   get '/sessions/login/organizations' => 'sessions#organizations_login', as: :organizations_login
   post '/sessions/create/organizations' => 'sessions#organizations_create'

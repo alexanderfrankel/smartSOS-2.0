@@ -13,10 +13,22 @@ class OrganizationsController < ApplicationController
   def create
     @organization = Organization.new(organization_params)
 
+    confirmation_token = UUID.new.generate
+    @organization.password = confirmation_token
+    @organization.password_confirmation = confirmation_token
+    @organization.account_confirmation_token = confirmation_token
+
     if @organization.save
-      session[:organization_id] = @organization.id
-      flash[:success] = "Your organization was created successfully"
-      redirect_to organization_path(@organization)
+      
+
+      AccountConfirmationMailer.confirm_account(@organization).deliver
+
+      flash[:success] = "Please check your email to confirm you account and set your password"
+      # session[:organization_id] = @organization.id
+      # flash[:success] = "Your organization was created successfully"
+      # redirect_to organization_path(@organization)
+      redirect_to root_url
+
     else
       flash.now.alert = "Apologies. Your Organization has not been registered."
       render 'new'
