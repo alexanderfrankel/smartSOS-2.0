@@ -24,7 +24,7 @@ PledgedItemsController.prototype = {
     $.ajax({
       url: '/campaigns/' + campaign_id + '/pledges',
       type: 'POST',
-      data: this.list.data()
+      data: this.list.json()
     }).done(function(response) {
       window.location.href = '/campaigns';
     });
