@@ -1,10 +1,10 @@
 var ready;
 ready = function() {
 
-  requestedItemsController = new RequestedItemsController(new List(registry));
-  pledgedItemsController = new PledgedItemsController(new List([]));
+  requested_list = new List(registry);
+  pledged_list = new List([])
 
-  appController = new ApplicationController(requestedItemsController, pledgedItemsController);
+  appController = new ApplicationController(requested_list, pledged_list);
 
   window.app = appController;
 
