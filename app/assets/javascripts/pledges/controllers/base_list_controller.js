@@ -1,6 +1,6 @@
 function BaseListController(list){
   this.list = list;
-  this.view = new ItemView(list);
+  this.view = new ListView(list);
   this.render();
 }
 

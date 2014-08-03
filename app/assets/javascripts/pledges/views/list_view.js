@@ -1,8 +1,8 @@
-function ItemView(list) {
+function ListView(list) {
   this.list = list;
 };
 
-ItemView.prototype = {
+ListView.prototype = {
     render: function() {
       return ''
     },
