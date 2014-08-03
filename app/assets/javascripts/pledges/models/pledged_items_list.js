@@ -1,21 +1,21 @@
 function PledgedItemsList(registry) {
     this.items = [];
     this.total = 0;
-  this.registry = registry;
-  this.populate();
-  this.updateTotal();
+    this.registry = registry;
+    this.populate();
+    this.updateTotal();
 }
 
 PledgedItemsList.prototype = {
-  populate: function() {
-    for(var i = 0; i < this.registry.length; i++) {
-      this.items.push(this.registry[i]);
-    }
-    this.updateTotal();
-  },
+    populate: function() {
+      for(var i = 0; i < this.registry.length; i++) {
+        this.items.push(this.registry[i]);
+      }
+      this.updateTotal();
+    },
 
     increaseQuantity: function(item_id) {
-        var existingPledge = this.pledgeExists(item_id);
+        var existingPledge = this.item(item_id);
         if (existingPledge) {
             existingPledge.quantity++;
         } else {
@@ -29,13 +29,12 @@ PledgedItemsList.prototype = {
         this.updateTotal();
     },
 
-    pledgeExists: function(item_id) {
-        for (var i = 0; i < this.items.length; i++) {
-            if (item_id === this.items[i].id) {
-                return this.items[i];
-            }
+    item: function(item_id){
+      for(var i=0; i<this.items.length; i++) {
+        if (item_id === this.items[i].id) {
+          return this.items[i];
         }
-        return false;
+      }
     },
 
     reduceQuantity: function(pledge_id) {

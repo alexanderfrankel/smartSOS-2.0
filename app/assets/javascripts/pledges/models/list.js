@@ -1,4 +1,4 @@
-function RequestedItemsList(registry) {
+function List(registry) {
   this.items = [];
   this.total = 0;
   this.registry = registry;
@@ -6,7 +6,7 @@ function RequestedItemsList(registry) {
   this.updateTotal();
 }
 
-RequestedItemsList.prototype = {
+List.prototype = {
   populate: function() {
     for(var i = 0; i < this.registry.length; i++) {
       this.items.push(this.registry[i]);
@@ -17,9 +17,10 @@ RequestedItemsList.prototype = {
   reduceQuantity: function(item_id) {
     if(this.item(item_id).quantity > 0) {
       this.item(item_id).quantity--;
+      this.updateTotal();
+      return true
     }
-    this.updateTotal();
-    return true
+    return false
   },
 
   item: function(item_id){
@@ -31,7 +32,17 @@ RequestedItemsList.prototype = {
   },
 
   increaseQuantity: function(item_id) {
-    this.item(item_id).quantity++;
+    var existingPledge = this.item(item_id);
+    if (existingPledge) {
+        existingPledge.quantity++;
+    } else {
+      for(var i=0;i < registry.length; i++){
+        item = registry[i];
+        if(item_id === item.id){
+          this.items.push(new Pledge(item.id, item.name, item.price, item.url));
+        }
+      }
+    }
     this.updateTotal();
   },
 
