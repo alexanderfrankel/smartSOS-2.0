@@ -1,7 +1,7 @@
 function List(registry) {
   this.items = [];
   this.total = 0;
-  this.registry = registry;
+  this.registry = registry || [];
   this.populate();
   this.updateTotal();
 }
