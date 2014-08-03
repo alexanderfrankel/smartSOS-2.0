@@ -6,38 +6,9 @@ function PledgedItemsList(registry) {
     this.updateTotal();
 }
 
-PledgedItemsList.prototype = {
-    populate: function() {
-      for(var i = 0; i < this.registry.length; i++) {
-        this.items.push(this.registry[i]);
-      }
-      this.updateTotal();
-    },
+PledgedItemsList.prototype = new List();
 
-    increaseQuantity: function(item_id) {
-        var existingPledge = this.item(item_id);
-        if (existingPledge) {
-            existingPledge.quantity++;
-        } else {
-          for(var i=0;i < registry.length; i++){
-            item = registry[i];
-            if(item_id === item.id){
-              this.items.push(new Pledge(item.id, item.name, item.price, item.url));
-            }
-          }
-        }
-        this.updateTotal();
-    },
-
-    item: function(item_id){
-      for(var i=0; i<this.items.length; i++) {
-        if (item_id === this.items[i].id) {
-          return this.items[i];
-        }
-      }
-    },
-
-    reduceQuantity: function(pledge_id) {
+PledgedItemsList.prototype.reduceQuantity = function(pledge_id) {
       for ( var i = 0; i < this.items.length; i++) {
         if(this.items[i].id === pledge_id) {
           this.items[i].quantity--;
@@ -47,16 +18,9 @@ PledgedItemsList.prototype = {
         }
       }
       this.updateTotal();
-    },
+    }
 
-    updateTotal: function() {
-        this.total = 0;
-        for (var i = 0; i < this.items.length; i++) {
-            this.total += this.items[i].price * this.items[i].quantity;
-        }
-    },
-
-    data: function(){
+PledgedItemsList.prototype.data = function(){
       var formattedPledgeData = []
       for(var i=0; i < this.items.length; i++) {
         var pledge = this.items[i];
@@ -64,4 +28,3 @@ PledgedItemsList.prototype = {
       }
       return {"pledge": formattedPledgeData};
     }
-}
