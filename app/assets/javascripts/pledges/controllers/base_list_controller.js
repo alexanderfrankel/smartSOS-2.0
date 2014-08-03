@@ -1,3 +1,6 @@
+// This BaseListController implements common methods used in
+// list controllers and should be used as a list prototype.
+
 function BaseListController(list){
   this.list = list;
   this.view = new ListView(list);

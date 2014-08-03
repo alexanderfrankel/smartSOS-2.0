@@ -1,3 +1,4 @@
+// Initialize a list with a collection of data
 function List(registry) {
   this.items = [];
   this.total = 0;
@@ -6,6 +7,7 @@ function List(registry) {
   this.updateTotal();
 }
 
+// Standard fuctions in Lists
 List.prototype = {
   populate: function() {
     for(var i = 0; i < this.registry.length; i++) {
