@@ -27,3 +27,5 @@ vendor/assets/javascripts/.DS_Store
 vendor/assets/stylesheets/.DS_Store
 vendor/assets/.DS_Store
 vendor/assets/fonts/.DS_Store~HEAD
+
+.#*

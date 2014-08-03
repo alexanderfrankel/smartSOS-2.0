@@ -14,6 +14,8 @@ Smartsos::Application.routes.draw do
 
   resources :donors, only: [:new, :create]
 
+  resources :password_resets
+
   # SESSION ROUTES
   get '/sessions/login/organizations' => 'sessions#organizations_login', as: :organizations_login
   post '/sessions/create/organizations' => 'sessions#organizations_create'
