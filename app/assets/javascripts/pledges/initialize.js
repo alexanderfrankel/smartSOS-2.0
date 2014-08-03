@@ -1,15 +1,12 @@
 var ready;
 ready = function() {
 
-  requestedItemsController = new RequestedItemsController(new RequestedItemsList, new RequestedItemsView);
-  requestedItemsController.init()
-
-  pledgedItemsController = new PledgedItemsController(new PledgedItemsList, new PledgedItemsView);
+  requestedItemsController = new RequestedItemsController(new List(registry));
+  pledgedItemsController = new PledgedItemsController(new PledgedItemsList([]));
 
   appController = new ApplicationController(requestedItemsController, pledgedItemsController);
-  appController.listenForPledge();
-  appController.listenForPledgesSubmit();
-  appController.listenForPledgesRemove();
+
+  window.app = appController;
 
 };
 

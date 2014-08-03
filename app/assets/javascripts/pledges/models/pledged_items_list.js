@@ -1,34 +1,48 @@
-function PledgedItemsList() {
-    this.pledges = [];
+function PledgedItemsList(registry) {
+    this.items = [];
     this.total = 0;
+    this.registry = registry;
+    this.populate();
+    this.updateTotal();
 }
 
 PledgedItemsList.prototype = {
-    addPledge: function(newPledge) {
-        var existingPledge = this.pledgeExists(newPledge);
+    populate: function() {
+      for(var i = 0; i < this.registry.length; i++) {
+        this.items.push(this.registry[i]);
+      }
+      this.updateTotal();
+    },
+
+    increaseQuantity: function(item_id) {
+        var existingPledge = this.item(item_id);
         if (existingPledge) {
             existingPledge.quantity++;
         } else {
-            this.pledges.push(new Pledge(newPledge.id, newPledge.name, newPledge.price, newPledge.url));
+          for(var i=0;i < registry.length; i++){
+            item = registry[i];
+            if(item_id === item.id){
+              this.items.push(new Pledge(item.id, item.name, item.price, item.url));
+            }
+          }
         }
         this.updateTotal();
     },
 
-    pledgeExists: function(newPledge) {
-        for (var i = 0; i < this.pledges.length; i++) {
-            if (newPledge.id === this.pledges[i].id) {
-                return this.pledges[i];
-            }
+    item: function(item_id){
+      for(var i=0; i<this.items.length; i++) {
+        if (item_id === this.items[i].id) {
+          return this.items[i];
         }
-        return false;
+      }
     },
 
-    removePledge: function(pledge_id) {
-      for ( var i = 0; i < this.pledges.length; i++) {
-        if(this.pledges[i].id === pledge_id) {
-          this.pledges[i].quantity--;
-          if(this.pledges[i].quantity === 0) {
-            this.pledges.splice(i, 1)
+    reduceQuantity: function(pledge_id) {
+      for ( var i = 0; i < this.items.length; i++) {
+        if(this.items[i].id === pledge_id) {
+          this.items[i].quantity--;
+          if(this.items[i].quantity === 0) {
+            this.items.splice(i, 1)
           }
         }
       }
@@ -37,8 +51,17 @@ PledgedItemsList.prototype = {
 
     updateTotal: function() {
         this.total = 0;
-        for (var i = 0; i < this.pledges.length; i++) {
-            this.total += this.pledges[i].price * this.pledges[i].quantity;
+        for (var i = 0; i < this.items.length; i++) {
+            this.total += this.items[i].price * this.items[i].quantity;
         }
+    },
+
+    data: function(){
+      var formattedPledgeData = []
+      for(var i=0; i < this.items.length; i++) {
+        var pledge = this.items[i];
+        formattedPledgeData.push({"request_id": pledge.id, "quantity": pledge.quantity});
+      }
+      return {"pledge": formattedPledgeData};
     }
 }
