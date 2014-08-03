@@ -4,9 +4,9 @@ function PledgedItemsController(list) {
   this.render();
 }
 
-PledgedItemsController.prototype = {
+PledgedItemsController.prototype = new BaseListController([]);
 
-  listen: function() {
+PledgedItemsController.prototype.listen = function() {
     var self = this;
     $(document).on('click', '#pledged-items-submit', function(event) {
       event.preventDefault();
@@ -17,9 +17,9 @@ PledgedItemsController.prototype = {
       self.transfer($(this).data('id'), app.requestedItemsController.list)
       app.render();
     })
-  },
+  }
 
-  submitPledgedItems: function() {
+PledgedItemsController.prototype.submitPledgedItems = function() {
     var campaign_id = $('.dashboard-title').data('id');
     $.ajax({
       url: '/campaigns/' + campaign_id + '/pledges',
@@ -28,16 +28,4 @@ PledgedItemsController.prototype = {
     }).done(function(response) {
       window.location.href = '/campaigns';
     });
-  },
-
-  render: function(){
-    this.view.render();
-  },
-
-  transfer: function(item_id, to) {
-    if(this.list.reduceQuantity(item_id)){
-      to.increaseQuantity(item_id);
-    }
-    this.render();
   }
-}
