@@ -15,8 +15,13 @@ List.prototype = {
   },
 
   reduceQuantity: function(item_id) {
-    if(this.item(item_id).quantity > 0) {
-      this.item(item_id).quantity--;
+    var item = this.item(item_id);
+    if(item && item.quantity > 0) {
+      item.quantity--;
+
+      if(item.quantity === 0) {
+        this.items.splice(this.items.indexOf(item), 1)
+      }
       this.updateTotal();
       return true
     }
@@ -39,7 +44,7 @@ List.prototype = {
       for(var i=0;i < registry.length; i++){
         item = registry[i];
         if(item_id === item.id){
-          this.items.push(new Pledge(item.id, item.name, item.price, item.url));
+          this.items.unshift(new Pledge(item.id, item.name, item.price, item.url));
         }
       }
     }
