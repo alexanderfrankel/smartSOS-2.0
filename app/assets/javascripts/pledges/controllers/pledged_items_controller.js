@@ -1,7 +1,7 @@
 function PledgedItemsController(list) {
   this.list = list;
   this.view = new PledgedItemsView(list);
-  this.render_list();
+  this.render();
 }
 
 PledgedItemsController.prototype = {
@@ -15,7 +15,7 @@ PledgedItemsController.prototype = {
     $(document).on('click', '.pledged-item', function(event) {
       event.preventDefault();
       self.transfer($(this).data('id'), app.requestedItemsController.list)
-      app.requestedItemsController.render_list();
+      app.render();
     })
   },
 
@@ -30,13 +30,13 @@ PledgedItemsController.prototype = {
     });
   },
 
-  render_list: function() {
+  render: function(){
     this.view.render();
   },
 
   transfer: function(item_id, to) {
-    this.list.reduceQuantity(item_id)
-    to.increaseQuantity(item_id)
-    this.render_list();
+    this.list.reduceQuantity(item_id);
+    to.increaseQuantity(item_id);
+    this.render();
   }
 }

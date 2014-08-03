@@ -1,7 +1,7 @@
 function RequestedItemsController(list) {
   this.list = list;
   this.view = new RequestedItemsView(list);
-  this.render_list();
+  this.render();
 }
 
 RequestedItemsController.prototype = {
@@ -10,11 +10,11 @@ RequestedItemsController.prototype = {
     $(document).on('click', '.requested-item', function(event) {
       var item_id = $(this).data('id')
       self.transfer(item_id, app.pledgedItemsController.list)
-      app.pledgedItemsController.render_list();
+      app.render();
     });
   },
 
-  render_list: function(){
+  render: function(){
     this.view.render();
   },
 
@@ -22,6 +22,6 @@ RequestedItemsController.prototype = {
     if(this.list.reduceQuantity(item_id)){
       to.increaseQuantity(item_id);
     }
-    this.render_list();
+    this.render();
   }
 }
