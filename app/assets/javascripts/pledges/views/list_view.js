@@ -27,11 +27,17 @@ ListView.prototype = {
       return pledgedItemFormat;
     },
 
+    // Join the css_prefix, items, and the specified part.
+    // Setting a css_prefix of 'pledged' and sending the argument 'total'
+    // will return 'pledged-items-total'
     container_class: function(part){
       var klass = [this.css_prefix,'items',part].filter(function(string) { if (string !== '') { return string } }).join('-');
       return klass
     },
 
+    // Join the css_prefix, item, and the specified part.
+    // Setting a css_prefix of 'pledged' and sending the argument 'total'
+    // will return 'pledged-item-total'
     item_class: function(part){
       var klass = [this.css_prefix,'item',part].filter(function(string) { if (string !== '') { return string } }).join('-');
       return klass
