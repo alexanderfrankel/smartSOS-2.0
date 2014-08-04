@@ -4,7 +4,7 @@ function PledgedItemsController(list) {
   this.render();
 }
 
-PledgedItemsController.prototype = new BaseListController([]);
+PledgedItemsController.prototype = new BaseListController();
 
 PledgedItemsController.prototype.listen = function() {
     var self = this;

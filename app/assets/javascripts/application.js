@@ -16,5 +16,6 @@
 //= require bootstrap.js
 //= require bootstrap.min.js
 //= require turbolinks
+//= require pledges/models/list
 //= require pledges/views/list_view
 //= require_tree .

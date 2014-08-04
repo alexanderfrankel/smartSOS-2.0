@@ -1,10 +1,10 @@
 function RequestedItemsController(list) {
-  this.list = list;
+  this.list = list || new List();
   this.view = new RequestedItemsView(list);
   this.render();
 }
 
-RequestedItemsController.prototype = new BaseListController([]);
+RequestedItemsController.prototype = new BaseListController();
 
 RequestedItemsController.prototype.listen = function(){
   var self = this;

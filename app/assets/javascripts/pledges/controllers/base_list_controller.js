@@ -2,7 +2,7 @@
 // list controllers and should be used as a list prototype.
 
 function BaseListController(list){
-  this.list = list;
+  this.list = list || new List();
   this.view = new ListView(list);
   this.render();
 }
